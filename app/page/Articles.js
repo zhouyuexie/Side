@@ -58,19 +58,16 @@ const Articles = React.createClass({
 	},
 	_onPress(item){
 		const {RootNavigator} = this.props;
-		fetch("http://192.168.31.86/api/Topic/GetDetail", {
-			method: 'POST',
+		fetch("http://192.168.31.86/api/Topic/GetDetail/"+item.uniqueid, {
+			method: 'GET',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				uniqueid: item.uniqueid
-			})
+			}
 		}).then((response)=>response.json()).then((res)=>{
 			jumpUseName(RootNavigator,"ReadArticle",res.data);
 		}).catch((e)=>{
-			Reactotron.log(e)
+			Reactotron.log(e);
 		});
 	},
 	componentDidMount(){

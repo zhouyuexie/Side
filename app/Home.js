@@ -72,7 +72,9 @@ class Home extends Component{
 					<HomeList RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={true} opacity={0.6} ref="Load" />
+				<Load isShow={true} hasChildren={true} opacity={0.6} ref="Load">
+					<Text>你好</Text>
+				</Load>
 			</View>
 		)
 	}

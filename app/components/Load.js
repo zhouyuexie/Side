@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Reactotron from 'reactotron-react-native';
 
 import {Width,Height,Scale} from "./DeviceInfo";//获取设备信息
 
@@ -27,7 +28,8 @@ class Load extends Component{
 			onLoadEnd:()=>{},
 			opacity:0.5,
 			bgColor:"#000000",
-			isShow:false
+			isShow:false,
+			hasChildren:false,//默认没有子类
 		}
 	}
 	constructor(props){
@@ -45,20 +47,34 @@ class Load extends Component{
 		return (
 			<View style={[styles.container,{zIndex:this.props.isShow?this.state.zIndex:-10}]}>
 				<Animated.View style={[styles.center,{backgroundColor:this.props.bgColor,opacity:this.props.opacity}]}>
-					<Image style={styles.img} onPress={()=>{this._onPress()}} source={require("../assest/load1.gif")} />
-					{/*<TouchableOpacity 
-											style={styles.close}
-											activeOpacity={0.9}
-											onPress={()=>{this._onPress()}}>
-											<Icon name="times" size={16} color="#fff"></Icon>
-										</TouchableOpacity>*/}
+					{this.isCustom()}
 				</Animated.View>
 			</View>
-		);
+		)
+	}
+	isCustom(){
+		// 是否有子元素
+		if(this.props.hasChildren){
+			return this.props.children;
+		}
+		else{
+			return (
+				<View>
+					<Image style={styles.img} onPress={()=>{this._onPress()}} source={require("../assest/load1.gif")} />
+					<TouchableOpacity 
+						style={styles.close}
+						activeOpacity={0.9}
+						onPress={()=>{this._onPress()}}>
+						<Icon name="times" size={15} color="#fff"></Icon>
+					</TouchableOpacity>
+				</View>
+			)
+		}
 	}
 	_onPress(){
 	// 	const {navigator} = this.props;
 	// 	navigator.pop();
+		this.CloseLoad();
 	}
 	CloseLoad(){
 		this.setState({
@@ -114,13 +130,13 @@ const styles = StyleSheet.create({
 	},
 	close:{
 		position:"absolute",
-		top:10,
-		right:10,
+		top:5,
+		right:5,
 		backgroundColor:"#3ca7f4",
-		borderRadius:12,
-		width:24,
-		height:24,
-		borderWidth:1,
+		borderRadius:10,
+		width:20,
+		height:20,
+		borderWidth:2,
 		borderColor:"#fff",
 		justifyContent:"center",
 		alignItems:"center"
