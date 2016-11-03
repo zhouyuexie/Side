@@ -1,0 +1,4 @@
+<resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">ccpuUKsIcY3S1P3kgDPeRBMPFw92N1ouPeOkf</string>
+    <string name="app_name">Side</string>
+</resources>
