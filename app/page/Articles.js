@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
 	root:{
 		// width:Width,
 		// flexDirection:"column",
-		// backgroundColor:"#fff",
+		backgroundColor:"#fff",
 		flex:1
 	},
 	container:{
 		flex: 1, 
 		position: 'relative', 
 		flexDirection: 'column', 
-		backgroundColor: 'transparent'
+		backgroundColor: '#fff'
 	},
 	lists:{
 		flexDirection:"row",

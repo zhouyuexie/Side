@@ -72,7 +72,7 @@ class Home extends Component{
 					<HomeList RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load opacity={1} ref="Load" />
+				<Load isShow={true} opacity={0.6} ref="Load" />
 			</View>
 		)
 	}
@@ -100,13 +100,12 @@ class Home extends Component{
 				}
 			});
 		}
-		
+		// this.refs.Load.OpenLoad();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
 			BackAndroid.removeEventListener("hardwareBackPress");
 		}
-		this.refs.Load.OpenLoad();
 	}
 	_onRefresh(){
 		this.setState({isRefreshing:true});
@@ -133,7 +132,9 @@ class Home extends Component{
     });
 	}
 	componentDidMount(){
-		this.refs.Load.CloseLoad();
+		setTimeout(()=>{
+			this.refs.Load.CloseLoad();
+		},2000)
 	}
 }
 

@@ -26,7 +26,8 @@ class Load extends Component{
 		return {
 			onLoadEnd:()=>{},
 			opacity:0.5,
-			bgColor:"#fff"
+			bgColor:"#000000",
+			isShow:false
 		}
 	}
 	constructor(props){
@@ -42,7 +43,7 @@ class Load extends Component{
 			return null;
 		}
 		return (
-			<View style={[styles.container,{zIndex:this.state.zIndex}]}>
+			<View style={[styles.container,{zIndex:this.props.isShow?this.state.zIndex:-10}]}>
 				<Animated.View style={[styles.center,{backgroundColor:this.props.bgColor,opacity:this.props.opacity}]}>
 					<Image style={styles.img} onPress={()=>{this._onPress()}} source={require("../assest/load1.gif")} />
 					{/*<TouchableOpacity 
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
 		height:100,
 		borderRadius:20,
 		resizeMode:"cover",
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
 	},
 	close:{
 		position:"absolute",

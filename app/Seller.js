@@ -67,6 +67,7 @@ class Seller extends Component{
 				size: 20,
 			})
 		}).then((response)=>response.json()).then((res)=>{
+			Reactotron.log(res)
 			this.setState({
 				articles:res.data.content
 			});
