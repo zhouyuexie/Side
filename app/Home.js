@@ -10,6 +10,7 @@ import {
 	ToastAndroid,
 	Navigator,
 	Alert,
+	Image,
 	RefreshControl,
 	Platform
 } from 'react-native';
@@ -72,8 +73,8 @@ class Home extends Component{
 					<HomeList RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={true} hasChildren={true} opacity={0.6} ref="Load">
-					<Text>你好</Text>
+				<Load isShow={true} hasChildren={false} Image={4} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} ref="Load">
+					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
 			</View>
 		)
@@ -116,7 +117,7 @@ class Home extends Component{
 				isRefreshing:false
 			});
 			// Alert.alert("列表刷新完毕","可以继续刷新");
-			this.refs.Load.setTimeClose(2000);
+			this.refs.Load.setTimeClose(5000);
 		})
 		// Refreshing(this.props,()=>{
 		// 	this.setState({

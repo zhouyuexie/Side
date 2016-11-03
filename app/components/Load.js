@@ -15,13 +15,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Reactotron from 'reactotron-react-native';
 
 import {Width,Height,Scale} from "./DeviceInfo";//获取设备信息
+const LoadImage = [
+	require("../assest/load1.gif"),
+	require("../assest/Load2.gif"),
+	require("../assest/Load3.gif"),
+	require("../assest/Load4.gif"),
+	require("../assest/Load6.gif"),
+	require("../assest/Load7.gif"),
+]
 
 class Load extends Component{
 	propTypes:{
 		// title:PropTypes.string.isRequired,
 		ref:PropTypes.string.isRequired,
 		opacity:PropTypes.number,
-		bgColor:PropTypes.string
+		bgColor:PropTypes.string,
+		hasChildren:PropTypes.bool,
+		isShow:PropTypes.bool,
+		Image:PropTypes.number,
+		showBtn:PropTypes.bool,
+		BtnStyle:PropTypes.any
 	}
 	static get defaultProps(){
 		return {
@@ -30,6 +43,9 @@ class Load extends Component{
 			bgColor:"#000000",
 			isShow:false,
 			hasChildren:false,//默认没有子类
+			Image:1,
+			showBtn:false,
+			BtnStyle:{}
 		}
 	}
 	constructor(props){
@@ -55,21 +71,30 @@ class Load extends Component{
 	isCustom(){
 		// 是否有子元素
 		if(this.props.hasChildren){
-			return this.props.children;
+			return React.cloneElement(this.props.children);
 		}
 		else{
 			return (
 				<View>
-					<Image style={styles.img} onPress={()=>{this._onPress()}} source={require("../assest/load1.gif")} />
-					<TouchableOpacity 
-						style={styles.close}
-						activeOpacity={0.9}
-						onPress={()=>{this._onPress()}}>
-						<Icon name="times" size={15} color="#fff"></Icon>
-					</TouchableOpacity>
+					<Image style={[styles.img,{width:this.props.Image===0?120:150,height:this.props.Image===0?120:150}]} onPress={()=>{this._onPress()}} source={LoadImage[this.props.Image]} />
+					{this._showButton()}
 				</View>
 			)
 		}
+	}
+	_showButton(){
+		// 如果现实退出按钮
+		if(this.props.showBtn){
+			return (
+				<TouchableOpacity 
+					style={[styles.close,this.props.BtnStyle]}
+					activeOpacity={0.9}
+					onPress={()=>{this._onPress()}}>
+					<Icon name="times" size={15} color="#fff"></Icon>
+				</TouchableOpacity>
+			)
+		}
+		return null;
 	}
 	_onPress(){
 	// 	const {navigator} = this.props;
@@ -117,16 +142,16 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: '#000000',
-    opacity: 0.5,
+    opacity: 0.6,
     justifyContent: 'center',
     alignItems:"center"
 	},
 	img:{
-		width:100,
-		height:100,
+		width:150,
+		height:150,
 		borderRadius:20,
 		resizeMode:"cover",
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
 	},
 	close:{
 		position:"absolute",
