@@ -10,9 +10,16 @@ import Swiper from 'react-native-swiper';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 
 class HomeSlider extends Component{
-	state = {
-		
-	};
+	//定义属性类型
+	propTypes:{
+
+	}
+	constructor(props){
+		super(props);
+		this.state = {
+			
+		}
+	}
 	render(){
 		return(
 			<Swiper style={styles.container} height={170} autoplay={true}>
@@ -28,12 +35,18 @@ class HomeSlider extends Component{
 			</Swiper>
 		)
 	}
+	componentWillMount(){
+		
+	}
+	componentDidMount(){
+		
+	}
 }
 
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: '#F5FCFF',
-		flexDirection:"row"
+		flexDirection:"row",
 	},
 	slider:{
 		justifyContent:"center",
