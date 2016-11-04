@@ -7,107 +7,20 @@ export const AppInfo = {
 	Version:"0.0.1",
 	Author:"yyhp",
 	IsFirstStart:true,
-	YoumengId:"友盟id"
-}
-
-// app启动图
-export const AppStartImg = {
-	
+	HomeDataReady:false,//首页数据是否准备完成
+	AppStartImg:[],// app启动图
 }
 
 // Home页面
 export const Home = {
 	// 链接
 	Link:{
-		HomeUpdate:"http://192.168.31.116:3000/appconfig",//app信息
-		HomeActiveity:"http://192.168.31.116:3000/activeity",// 活动部分
-		HomeList:"http://192.168.31.116:3000/list"// 列表部分
+		HomeIndex:"http://192.168.31.86/api/Home/Index",//app获取首页数据
 	},
-	// 轮播图
-	HomeSlider:[
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/banner1_sy.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/banner1_sy.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/banner1_sy.png"
-		}
-	],
-	// 菜单栏
-	HomeMenu:[
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_icon_kinds.png"
-		}
-	],
-	HomeActiveity:[
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/1_pic_4kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/2_pic_4kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/3_pic_4kinds.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/4_pic_4kinds.png"
-		}
-	],
-	HomeKill:[
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/pic_miaosha.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/pic_miaosha.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/pic_miaosha.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/pic_miaosha.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/pic_miaosha.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/pic_miaosha.png"
-		}
-	],
-	HomeSlider2:[
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/1_lunbo.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/1_lunbo.png"
-		},
-		{
-			"imgUrl":"http://192.168.31.116:3000/img/1_lunbo.png"
-		}
-	],
-	HomeList:[]
+	HomeSlider:[],// 轮播图
+	HomeMenu:[],// 菜单栏
+	HomeVideo:[],//视频
+	HomeList:[],//列表
 }
 
 // Seller页面

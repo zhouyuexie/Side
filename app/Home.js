@@ -27,7 +27,7 @@ import PictureArticle from "./components/PictureArticle";//图文信息
 import Tabs from "./components/Tabs";//底部
 
 import { connect } from 'react-redux';
-import { LogIn, skipLogIn } from './action/ActionUser';
+import {ChangeHomeDataReady} from './action/ActionAppStatus';
 
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
 import {Refreshing,PromiseRefreshing} from "./Update";
@@ -73,7 +73,7 @@ class Home extends Component{
 					<PictureArticle RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
+				<Load isShow={false} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
 					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
 				<Tabs RootNavigator={RootNavigator} onselect={0} />
@@ -106,7 +106,7 @@ class Home extends Component{
 		}
 	}
 	componentDidMount(){
-		this.refs.Load.setTimeClose();
+		// this.refs.Load.setTimeClose();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
@@ -131,12 +131,6 @@ class Home extends Component{
 		// 	});
 		// 	// Alert.alert("列表刷新完毕","可以继续刷新");
 		// })
-		// Refreshing(this.props,()=>{
-		// 	this.setState({
-		// 		isRefreshing:false
-		// 	});
-		// 	Alert.alert("列表刷新完毕","可以继续刷新");
-		// });
 	}
 	_handleScroll(e){
 		// 改变头部透明度
@@ -159,4 +153,11 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Home;
+function select(store){
+	return {
+		isLogin:store.userStore.isLogin,//用户是否登录
+		HomeDataReady:store.appStatusStore.HomeDataReady,//app首页是否加载完成数据,如果加载完成就进入首页
+	}
+}
+
+export default connect(select)(Home);

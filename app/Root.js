@@ -18,15 +18,15 @@ const InteractionManager = require('InteractionManager');
 
 import {Routes} from "./components/RouteStack";//路由栈
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
-import Update,{PromiseRefreshing} from "./Update";
+import {GetHomeData,ChangeHomeReady} from "./Update";
 
 class Root extends Component {
 	state = {
-		ready:true,
-		fadeAnim:new Animated.Value(0.2)
+		fadeAnim:new Animated.Value(0.2),
+		ready:false
 	}
 	render() {
-		if(this.state.ready){
+		if(!this.state.ready){
 			return (
 				<Animated.Image 
 					style={{
@@ -55,13 +55,10 @@ class Root extends Component {
 			 this.state.fadeAnim,    // The value to drive
 			 {toValue: 1},           // Configuration
 		 ).start();                // Don't forget start!
-		
 		InteractionManager.runAfterInteractions(()=>{
-			PromiseRefreshing(this.props).then(()=>{
-				this.setState({
-					ready:false
-				})
-			});
+			GetHomeData(this.props).then(()=>{
+				this.setState({ready:true})
+			});//获取首页数据,获取到数据后会更新HomeDataReady,然后就可以进入app界面
 		})
 		
 	}
@@ -69,11 +66,7 @@ class Root extends Component {
 
 function select(store){
 	return {
-		isLogin:store.userStore.isLogin,
-		status:store.userStore.status,
-		user:store.userStore.user,
-		HomeList:store.homeStore.HomeList,
-		Link:store.homeStore.Link
+		isLogin:store.userStore.isLogin,//用户是否登录
 	}
 }
 

@@ -6,31 +6,23 @@ import {Home} from "../Configure";//导入主页数据
 // 根据动作类型的返回值改变主页数据
 export default function ReducerHome(state=Home,action){
 	switch(action.type){
-		case HOME.CHANGE_LINK:
-			// ...state是ES7提案对象展开运算符
-			return {
-				...state
-			};
-		case HOME.CHANGE_SLIDER:
+		case HOME.GET_SLIDER:
 			// Object.assign是es6的方法,使用 Object.assign() 新建了一个副本
-			return Object.assign({},state,{})
-		case HOME.CHANGE_MENU:
+			return Object.assign({},state,{
+				HomeSlider:action.HomeSlider
+			})
+		case HOME.GET_MENU:
+		// ...state是ES7提案对象展开运算符
 			return {
-				...state
+				...state,
+				HomeMenu:action.HomeMenu
 			}
-		case HOME.CHANGE_ACTIVEITY:
+		case HOME.GET_VIDEO:
 			return {
-				...state
+				...state,
+				HomeVideo:action.HomeVideo
 			}
-		case HOME.CHANGE_KILL:
-			return {
-				...state
-			}
-		case HOME.CHANGE_SLIDER2:
-			return {
-				...state
-			}
-		case HOME.CHANGE_LIST:
+		case HOME.GET_LIST:
 			return {
 				...state,
 				HomeList:action.HomeList
