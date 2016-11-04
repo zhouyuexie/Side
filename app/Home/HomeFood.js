@@ -14,6 +14,7 @@ import {
 import Reactotron from 'reactotron-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
+import CardFooter from "../components/CardFooter";
 
 class HomeFood extends Component {	
 	render(){		
@@ -26,15 +27,7 @@ class HomeFood extends Component {
 					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
 					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
 				</ScrollView>
-				<View style={styles.bottomText}>
-					<Text style={styles.left}>私家厨房</Text>
-					<View style={styles.right}>
-						<Icon style={styles.clock} name="clock-o" size={18} color="#A4A4A4" />
-						<Text style={styles.text}>20分钟前</Text>
-						<Icon style={styles.commenting} name="commenting-o" size={16} color="#A4A4A4" />
-						<Text style={styles.text}>30</Text>
-					</View>
-				</View>
+				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
     	</View>
 		)
 	}

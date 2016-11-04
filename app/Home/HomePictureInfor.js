@@ -14,6 +14,7 @@ import {
 import Reactotron from 'reactotron-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
+import CardFooter from "../components/CardFooter";
 
 class HomePictureInfor extends Component {
 //定义属性类型
@@ -33,15 +34,7 @@ class HomePictureInfor extends Component {
 					<Text style={styles.title}>这样真的好吗？外来的万圣节从幼儿园就开始普及，而传统的节日却没有这么大的影响力。</Text>
 					<Image style={styles.image} source={require('../assest/2_product_pic.png')} />
         </View>
-				<View style={styles.bottomText}>
-					<Text style={styles.left}>咩咩sandy</Text>
-					<View style={styles.right}>
-						<Icon style={styles.clock} name="clock-o" size={18} color="#A4A4A4" />
-						<Text style={styles.text}>20分钟前</Text>
-						<Icon style={styles.commenting} name="commenting-o" size={16} color="#A4A4A4" />
-						<Text style={styles.text}>30</Text>
-					</View>
-				</View>
+				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
     	</View>
 		)
 	}

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 	img:{
   	width:Width,
   	height:170,
-  	resizeMode:"stretch"
+  	resizeMode:"cover"
   }
 });
 

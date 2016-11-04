@@ -15,6 +15,7 @@ import {
 
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";
+import CardFooter from "../components/CardFooter";
 
 class HomeHotVideo extends Component {
 	state={
@@ -47,10 +48,7 @@ class HomeHotVideo extends Component {
 				<Animated.View style={styles.continue}>
 					<Text style={[styles.continuetext,{width:this.state.width}]}>{this.state.continuePull?"即将起飞":"起飞准备"}</Text>
 				</Animated.View>
-				<View style={styles.bottomText}>
-					<Text style={styles.left}>十分钟教会你化妆</Text>
-					<Text style={styles.right}>1024</Text>
-				</View>
+				<CardFooter name="十分钟教会你化妆" time="20分钟之前" comment="45" />
     	</View>
 		)
 	}
