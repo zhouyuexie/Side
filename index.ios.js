@@ -18,6 +18,7 @@ import configureStore from "./app/store/Store";
 import {Width,Height,Scale} from "./app/components/DeviceInfo";//获取设备信息
 
 import Root from "./app/Root";
+import RouterRoot from "./app/RouterRoot";
 
 class Side extends Component {
   state = {
@@ -32,7 +33,7 @@ class Side extends Component {
     }
     return (
       <Provider store={this.state.store}>
-        <Root />
+        <RouterRoot />
       </Provider>
     );
   }

@@ -73,7 +73,7 @@ class Home extends Component{
 					<HomeList RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="down" bgAnimate="default" ref="Load">
+				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
 					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
 			</View>
