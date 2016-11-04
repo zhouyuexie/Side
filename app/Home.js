@@ -73,7 +73,7 @@ class Home extends Component{
 					<HomeList RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={true} hasChildren={false} Image={4} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} ref="Load">
+				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="down" bgAnimate="default" ref="Load">
 					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
 			</View>
@@ -113,11 +113,11 @@ class Home extends Component{
 	_onRefresh(){
 		this.setState({isRefreshing:true});
 		PromiseRefreshing(this.props).then(()=>{
+			this.refs.Load.setTimeClose();
 			this.setState({
 				isRefreshing:false
 			});
 			// Alert.alert("列表刷新完毕","可以继续刷新");
-			this.refs.Load.setTimeClose(5000);
 		})
 		// Refreshing(this.props,()=>{
 		// 	this.setState({
