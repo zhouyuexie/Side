@@ -16,24 +16,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import CardFooter from "../components/CardFooter";
 
-class HomePictureInfor extends Component {
-//定义属性类型
-	propTypes:{
-
-	}
-	constructor(props){
-		super(props);
-		this.state = {
-			
-		}
-	}	
+class Picture extends Component {	
 	render(){		
 		return(
 			<View style={styles.container}>
-				<View style={styles.content}>
-					<Text style={styles.title}>这样真的好吗？外来的万圣节从幼儿园就开始普及，而传统的节日却没有这么大的影响力。</Text>
-					<Image style={styles.image} source={require('../assest/2_product_pic.png')} />
-        </View>
+				<Text style={styles.title}>xx人都想知道的当地60种超赞小吃，史上最虐心美食~</Text>
+        <ScrollView contentContainerStyle={styles.imageItem} horizontal = {true} showsHorizontalScrollIndicator = {false}>
+					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
+					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
+					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
+					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
+				</ScrollView>
 				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
     	</View>
 		)
@@ -50,30 +43,26 @@ class HomePictureInfor extends Component {
 const styles = StyleSheet.create({
 	container:{
 		width:Width,
+    // height:200,
     justifyContent: "space-around",
     backgroundColor: "#FFF", 
     paddingTop:15,
     paddingBottom:10,
     paddingLeft:10,
     marginTop:10,
-    marginBottom:50,
-	},
-	content:{
-		flexDirection:'row',
-		justifyContent: "space-between",
 	},
 	title:{
-		width:Width/2+35,
 		fontSize:14,
 		color:"#555",
-		lineHeight:24,
+	},
+	imageItem:{
 		marginBottom:5,
 	},
 	image:{
 		width:Width/3-5,
-		height:Width/4,
-		marginRight:10,
-		marginBottom:8,
+		height:Width/3,
+		marginRight:8,
+		resizeMode:"contain",
 	},
 	bottomText:{
     flexDirection:'row',
@@ -96,10 +85,9 @@ const styles = StyleSheet.create({
 		marginRight:4,
 	},
 	commenting:{
-		// marginTop:1,
 		marginLeft:14,
 		marginRight:4,
 	}
 });
 
-export default HomePictureInfor;
+export default Picture;

@@ -17,7 +17,7 @@ import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";
 import CardFooter from "../components/CardFooter";
 
-class HomeHotVideo extends Component {
+class Plate extends Component {
 	state={
 		width:0,//设置显示和隐藏
 		continuePull:false,//继续下来,显示不同的文本
@@ -172,4 +172,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default HomeHotVideo;
+export default Plate;

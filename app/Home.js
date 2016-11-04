@@ -20,10 +20,10 @@ import Reactotron from 'reactotron-react-native';
 import HomeSearch from "./Home/HomeSearch"//搜索
 import HomeSlider from "./Home/HomeSlider";//轮播图
 import HomeBar from "./Home/HomeBar";//标头
-import HomeHotVideo from "./Home/HomeHotVideo";//热门视频
-import HomeFood from "./Home/HomeFood";//美食
-import HomeNews from "./Home/HomeNews"//资讯
-import HomePictureInfor from "./Home/HomePictureInfor";//图文信息
+import Plate from "./components/Plate";//板块
+import Picture from "./components/Picture";//全是图片
+import Post from "./components/Post"//资讯,没有图
+import PictureArticle from "./components/PictureArticle";//图文信息
 import Tabs from "./components/Tabs";//底部
 
 import { connect } from 'react-redux';
@@ -52,7 +52,8 @@ class Home extends Component{
 		return(
 			<View style={styles.root}>
 				<HomeSearch RootNavigator={RootNavigator} />
-				<ScrollView style={styles.container} showsVerticalScrollIndicator = {false} refreshControl={
+				<ScrollView style={styles.container} showsVerticalScrollIndicator={false}
+					refreshControl={
 						<RefreshControl 
 							refreshing={this.state.isRefreshing}
 							onRefresh={()=>{this._onRefresh()}}
@@ -66,10 +67,10 @@ class Home extends Component{
 					onScroll={(e)=>{this._handleScroll(e)}}>
 					<HomeSlider RootNavigator={RootNavigator} />
 					<HomeBar RootNavigator={RootNavigator} />
-					<HomeHotVideo RootNavigator={RootNavigator} />
-					<HomeFood RootNavigator={RootNavigator} />
-					<HomeNews RootNavigator={RootNavigator} />
-					<HomePictureInfor RootNavigator={RootNavigator} />
+					<Plate RootNavigator={RootNavigator} />
+					<Picture RootNavigator={RootNavigator} />
+					<Post RootNavigator={RootNavigator} />
+					<PictureArticle RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
 				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">

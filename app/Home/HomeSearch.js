@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 		  },
 		  android:{
 		    height:60,
-		    paddingTop:20
+		    // paddingTop:20
 		  }
 		}),
 		position:"absolute",

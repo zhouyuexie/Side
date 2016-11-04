@@ -16,12 +16,24 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import CardFooter from "../components/CardFooter";
 
-class HomeNews extends Component {	
+class PictureArticle extends Component {
+//定义属性类型
+	propTypes:{
+
+	}
+	constructor(props){
+		super(props);
+		this.state = {
+			
+		}
+	}	
 	render(){		
 		return(
 			<View style={styles.container}>
-				<Text style={styles.title}>这样真的好吗？外来的万圣节从幼儿园就开始普及，而传统的节日却没有这么大的影响力。</Text>
-        <Text style={styles.content}>看到朋友圈、新闻发的全是幼儿园过万圣节，有的有的小朋友还被扮相逼真的小老朋友吓哭，总觉得这种外来的...</Text>
+				<View style={styles.content}>
+					<Text style={styles.title}>这样真的好吗？外来的万圣节从幼儿园就开始普及，而传统的节日却没有这么大的影响力。</Text>
+					<Image style={styles.image} source={require('../assest/2_product_pic.png')} />
+        </View>
 				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
     	</View>
 		)
@@ -44,18 +56,24 @@ const styles = StyleSheet.create({
     paddingBottom:10,
     paddingLeft:10,
     marginTop:10,
+    marginBottom:50,
+	},
+	content:{
+		flexDirection:'row',
+		justifyContent: "space-between",
 	},
 	title:{
+		width:Width/2+35,
 		fontSize:14,
 		color:"#555",
 		lineHeight:24,
 		marginBottom:5,
 	},
-	content:{
-		fontSize:12,
-		lineHeight:22,
+	image:{
+		width:Width/3-5,
+		height:Width/4,
+		marginRight:10,
 		marginBottom:8,
-		color:"#A4A4A4",
 	},
 	bottomText:{
     flexDirection:'row',
@@ -84,4 +102,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default HomeNews;
+export default PictureArticle;

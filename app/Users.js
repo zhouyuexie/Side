@@ -14,7 +14,7 @@ import {
 
 import { connect } from 'react-redux';
 import { LogIn, skipLogIn,LogOut } from './action/ActionUser';
-
+import Reactotron from 'reactotron-react-native';
 // 记录屏幕信息
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
 
@@ -40,7 +40,10 @@ class Users extends Component{
 			<View style={[styles.root,this.props.style]}>
 				<StatusBar backgroundColor="#999" style={{color:"#000"}} barStyle="light-content" />
 				<UsersHeader isLogin={isLogin} RootNavigator={RootNavigator} username={user.phone} />
-				<ScrollView style={styles.container}>
+				<ScrollView 
+					style={styles.container}
+					scrollEventThrottle={1000}
+					onScroll={(e)=>{this._handleScroll(e)}}>
 					<UsersOrder isLogin={isLogin} RootNavigator={RootNavigator} />
 					<UsersList />
 					{this._showLogout(isLogin)}
@@ -48,6 +51,12 @@ class Users extends Component{
 				<Tabs onselect={2} RootNavigator={RootNavigator} />
 			</View>
 		)
+	}
+	_handleScroll(e){
+		// let alpha = (e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y) / 200;
+		if(e.nativeEvent.contentOffset.y<0){
+			// 说明下拉了
+		}
 	}
 	componentWillMount(){
 		// const {isLogin,dispatch,status,user,RootNavigator} = this.props;
