@@ -58,20 +58,20 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		alignItems:"center",
 		backgroundColor: "#41A2FF", 
-		// ...Platform.select({
-		//   ios:{
-		//     height:55,
-		//     paddingTop:10
-		//   },
-		//   android:{
-		//     height:60,
-		//     paddingTop:20
-		//   }
-		// }),
+		...Platform.select({
+		  ios:{
+		    height:55,
+		    paddingTop:10
+		  },
+		  android:{
+		    height:60,
+		    paddingTop:20
+		  }
+		}),
 		position:"absolute",
 		top:0,
 		left:0,
-		zIndex:10
+		zIndex:1
 	},
 	mapMarker:{
 		marginLeft:10,  

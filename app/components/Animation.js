@@ -486,15 +486,7 @@ const Main = {
 	transformTranslate: {
 		value:1,
 		type:"constant"
-	},
-	translateX: {
-    from: 0,
-    to: 0,
-    min: 0,
-    max: 1,
-    type: 'linear',
-    extrapolate: true,
-  },
+	}
 }
 
 function SwitchMain(init){

@@ -11,7 +11,8 @@ import {
 	Navigator,
 	Alert,
 	RefreshControl,
-	Platform
+	Platform,
+	Image
 } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
@@ -31,6 +32,7 @@ import { LogIn, skipLogIn } from './action/ActionUser';
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
 import {Refreshing,PromiseRefreshing} from "./Update";
 import {routesNumber} from "./components/RouteStack";//路由信息
+import Load from "./components/Load";
 
 class Home extends Component{
 	//定义属性类型
@@ -69,14 +71,11 @@ class Home extends Component{
 					<HomeNews RootNavigator={RootNavigator} />
 					<HomePictureInfor RootNavigator={RootNavigator} />
 				</ScrollView>
-<<<<<<< HEAD
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
 				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
 					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
-=======
 				<Tabs RootNavigator={RootNavigator} />
->>>>>>> 64c3ab74a01af82a0f3d8e7309b692184226393d
 			</View>
 		)
 	}
@@ -107,7 +106,7 @@ class Home extends Component{
 		}
 	}
 	componentDidMount(){
-		
+		this.refs.Load.setTimeClose();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
@@ -116,16 +115,15 @@ class Home extends Component{
 		
 	}
 	_onRefresh(){
-<<<<<<< HEAD
-		this.setState({isRefreshing:true});
-		PromiseRefreshing(this.props).then(()=>{
-			this.refs.Load.setTimeClose();
-			this.setState({
-				isRefreshing:false
-			});
-			// Alert.alert("列表刷新完毕","可以继续刷新");
-		})
-=======
+		this.refs.Load.setTimeClose();
+		// this.setState({isRefreshing:true});
+		// PromiseRefreshing(this.props).then(()=>{
+		// 	this.refs.Load.setTimeClose();
+		// 	this.setState({
+		// 		isRefreshing:false
+		// 	});
+		// 	// Alert.alert("列表刷新完毕","可以继续刷新");
+		// })
 		// this.setState({isRefreshing:true});
 		// PromiseRefreshing(this.props).then(()=>{
 		// 	this.setState({
@@ -133,7 +131,6 @@ class Home extends Component{
 		// 	});
 		// 	// Alert.alert("列表刷新完毕","可以继续刷新");
 		// })
->>>>>>> 64c3ab74a01af82a0f3d8e7309b692184226393d
 		// Refreshing(this.props,()=>{
 		// 	this.setState({
 		// 		isRefreshing:false
@@ -143,18 +140,18 @@ class Home extends Component{
 	}
 	_handleScroll(e){
 		// 改变头部透明度
-		let alpha = (e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y) / 200;
+		// let alpha = (e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y) / 200;
 
-    this.setState({
-    	updateAlpha:alpha
-    });
+  //   this.setState({
+  //   	updateAlpha:alpha
+  //   });
 	}	
 }
 
 const styles = StyleSheet.create({
 	root:{
 		flex:1,
-		backgroundColor: "#F1F2F6", 
+		backgroundColor: "#fff", 
 	},
 	container:{
 		marginTop:55,

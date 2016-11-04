@@ -33,7 +33,7 @@ class Side extends Component {
     }
     return (
       <Provider store={this.state.store}>
-        <RouterRoot />
+        <Root />
       </Provider>
     );
   }

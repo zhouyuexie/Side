@@ -11,12 +11,14 @@ import {
 	Text,
 	StatusBar,
 	Image,
-	Animated
+	Animated,
+	StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Scene, Router, TabBar, Modal, Schema, Actions, Reducer, ActionConst } from 'react-native-router-flux'
+import { Scene, Router, TabBar, Modal, Schema, Actions, Reducer, ActionConst } from 'react-native-router-flux';
 import {Routes} from "./components/RouteStack";//路由栈
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
+import Search from "./components/SearchBox";
 
 class TabIcon extends React.Component {
 	render(){
@@ -39,13 +41,15 @@ class RouterRoot extends Component {
 		return (
 			<Router createReducer={reducerCreate} sceneStyle={{backgroundColor:'#F7F7F7'}}>
 				<Scene key="modal" component={Modal}>
-					<Scene key="root" hideNavBar={true}>
-						<Scene key="Home" component={Routes.Home.component} title="主页"/>
-						<Scene key="register2" component={Routes.Home.component} title="主页2" duration={1}/>
-						<Scene key="tabbar" tabs={true}>
-							<Scene key="tab3" component={Routes.Seller.component} title="发现" hideTabBar={true} icon={TabIcon}/>
-							<Scene key="tab3" component={Routes.Users.component} title="个人中心" hideTabBar={true} icon={TabIcon}/>
-							<Scene key="tab3" component={Routes.Users.component} title="个人中心" hideTabBar={true} icon={TabIcon}/>
+					<Scene key="root" hideNavBar={false}>
+
+						<Scene key="tabbar" 
+							tabs={true}
+							tabBarStyle={styles.tabBarStyle}
+							tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+							<Scene key="tab3" component={Search} title="发现" hideTabBar={true} icon={TabIcon}/>
+							<Scene key="tab3" component={Search} title="个人中心" hideTabBar={true} icon={TabIcon}/>
+							<Scene key="tab3" component={Search} title="个人中心" hideTabBar={true} icon={TabIcon}/>
 						</Scene>
 					</Scene>
 				</Scene>
@@ -56,5 +60,14 @@ class RouterRoot extends Component {
 		
 	}
 }
+
+const styles = StyleSheet.create({
+	tabBarStyle: {
+    backgroundColor: '#eee',
+  },
+  tabBarSelectedItemStyle: {
+    backgroundColor: '#ddd',
+  },
+})
 
 export default RouterRoot;
