@@ -52,7 +52,7 @@ class Home extends Component{
 		return(
 			<View style={styles.root}>
 				<HomeSearch RootNavigator={RootNavigator} />
-				<ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator = {false} refreshControl={
+				<ScrollView style={styles.container} showsVerticalScrollIndicator = {false} refreshControl={
 						<RefreshControl 
 							refreshing={this.state.isRefreshing}
 							onRefresh={()=>{this._onRefresh()}}
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
 	},
 	container:{
 		marginTop:55,
+		backgroundColor: "#d5d5d5", 
 	}
 });
 
