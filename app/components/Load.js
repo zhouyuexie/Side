@@ -107,8 +107,8 @@ class Load extends Component{
 		let AnimatedWay = {};
 		switch(this.props.fadeWay){
 			case "up":
-				AnimatedWay.in = [0,Height/2-100];
-				AnimatedWay.out = [0,-(Height/2-100)];
+				AnimatedWay.in = [0,Height/2-80];
+				AnimatedWay.out = [0,-(Height/2-80)];
 				break;
 			case "down":
 				AnimatedWay.in = [Height,-(Height/2+100)];
