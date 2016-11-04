@@ -8,7 +8,7 @@ import {
 	PixelRatio,
 	TouchableOpacity
 } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { LogIn, skipLogIn } from '../action/ActionUser';
 import {Routes,jumpUseName} from "../components/RouteStack";//路由栈
@@ -20,40 +20,56 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class Tabs extends Component{
 	//定义属性类型
 	propTypes:{
-
+		onselect:React.PropTypes.number,
+		RootNavigator:React.PropTypes.object.isRequired
 	}
-	constructor(props){
-		super(props);
-		this.state = {
-			
+	static get defaultProps(){
+		return {
+			onselect:0,
+			Tabs:["首页","发现","身边","公众号","我的"]
+		}
+	}
+	_onPress(index){
+		const { RootNavigator } = this.props;
+		if(RootNavigator){
+			switch(index){
+				case 0:
+					jumpUseName(RootNavigator,"Home");
+					break;
+				case 1:
+					jumpUseName(RootNavigator,"Seller");
+					break;
+				case 2:
+					jumpUseName(RootNavigator,"Users");
+					break;
+			}
 		}
 	}
 	render(){
 		let iconSize = 26;
 		return(
 			<View style={styles.container}>
-        <TouchableOpacity activeOpacity={0.8} style={styles.tab}>
-          <Icon name="th-large" size={iconSize} color="#FF4D00" />
-          <Text style={styles.tabtext}>首页</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.tab}>
-          <Icon name="search" size={iconSize} color="#999" />
-          <Text style={styles.tabtext}>发现</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.tab}>
-          <Icon name="user" size={iconSize} color="#999" />
-          <Text style={styles.tabtext}>身边</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.tab}>
-          <Icon name="user" size={iconSize} color="#999" />
-          <Text style={styles.tabtext}>公众号</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.tab}>
-          <Icon name="user" size={iconSize} color="#999" />
-          <Text style={styles.tabtext}>我的</Text>
-        </TouchableOpacity>
-     </View>
+				{this.props.Tabs.map((data,index)=>{
+					return this._renderTab(data,index);
+				})}
+		 </View>
 		)
+	}
+	_renderTab(data,index){
+		let iconSize = 26;
+		return (
+			<TouchableOpacity 
+				key={"tabs"+index}
+				activeOpacity={0.8} 
+				onPress={()=>{this._onPress(index)}}
+				style={styles.tab}>
+				<Icon name="user" size={iconSize}  color={this.props.onselect===index?"#FF4D00":"#999"} />
+				<Text style={[styles.tabtext,{color:this.props.onselect===index?"#FF4D00":"#999"}]}>{data}</Text>
+			</TouchableOpacity>
+		)
+	}
+	shouldComponentUpdate(newvalue,oldvalue){
+		return newvalue.onselect !== this.props.onselect
 	}
 	componentWillMount(){
 		

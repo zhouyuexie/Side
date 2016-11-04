@@ -75,13 +75,12 @@ class Home extends Component{
 				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
 					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
-				<Tabs RootNavigator={RootNavigator} />
+				<Tabs RootNavigator={RootNavigator} onselect={0} />
 			</View>
 		)
 	}
 	componentWillMount(){
 		const { RootNavigator } = this.props;
-		Reactotron.log(routesNumber(RootNavigator));
 		if(Platform.OS === "android"){
 			BackAndroid.addEventListener("hardwareBackPress",()=>{
 				const number = routesNumber(RootNavigator);//多少个路由
