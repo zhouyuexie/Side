@@ -40,30 +40,96 @@ class Home extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			
+			exitStartTime:null,
+			isRefreshing : false,
+			updateAlpha:0
 		}
 	}
 	render(){
+		const { RootNavigator } = this.props;
 		return(
 			<View style={styles.root}>
-				<HomeSearch />
-				<ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator = {false}>
-					<HomeSlider />
-					<HomeBar />
-					<HomeHotVideo />
-					<HomeFood />
-					<HomeNews />
-					<HomePictureInfor />
+				<HomeSearch RootNavigator={RootNavigator} />
+				<ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator = {false} refreshControl={
+						<RefreshControl 
+							refreshing={this.state.isRefreshing}
+							onRefresh={()=>{this._onRefresh()}}
+							title="小二努力刷新中..."
+							color="#999"
+							tintColor="#ffdc7e"
+							progressBackgroundColor="#fff"
+						/>
+					}
+					scrollEventThrottle={10}
+					onScroll={(e)=>{this._handleScroll(e)}}>
+					<HomeSlider RootNavigator={RootNavigator} />
+					<HomeBar RootNavigator={RootNavigator} />
+					<HomeHotVideo RootNavigator={RootNavigator} />
+					<HomeFood RootNavigator={RootNavigator} />
+					<HomeNews RootNavigator={RootNavigator} />
+					<HomePictureInfor RootNavigator={RootNavigator} />
 				</ScrollView>
-				<Tabs />
+				<Tabs RootNavigator={RootNavigator} />
 			</View>
 		)
 	}
 	componentWillMount(){
-		
+		const { RootNavigator } = this.props;
+		Reactotron.log(routesNumber(RootNavigator));
+		if(Platform.OS === "android"){
+			BackAndroid.addEventListener("hardwareBackPress",()=>{
+				const number = routesNumber(RootNavigator);//多少个路由
+				// 监听android返回键
+				if(!this.state.exitStartTime){
+					this.state.exitStartTime = Date.now();
+					ToastAndroid.show("再按一次退出程序",3);
+					return true;
+				}
+				else{
+					if(this.state.exitStartTime+3000>Date.now()){
+						// 说明可以退出
+						return false;
+					}
+					else{
+						this.state.exitStartTime = Date.now();
+						ToastAndroid.show("再按一次退出程序",3);
+						return true;
+					}
+				}
+			});
+		}
 	}
 	componentDidMount(){
 		
+	}
+	componentWillUnmount(){
+		if(Platform.OS === 'android'){
+			BackAndroid.removeEventListener("hardwareBackPress");
+		}
+		
+	}
+	_onRefresh(){
+		// this.setState({isRefreshing:true});
+		// PromiseRefreshing(this.props).then(()=>{
+		// 	this.setState({
+		// 		isRefreshing:false
+		// 	});
+		// 	// Alert.alert("列表刷新完毕","可以继续刷新");
+		// })
+		// Refreshing(this.props,()=>{
+		// 	this.setState({
+		// 		isRefreshing:false
+		// 	});
+		// 	Alert.alert("列表刷新完毕","可以继续刷新");
+		// });
+	}
+	_handleScroll(e){
+		// 改变头部透明度
+		let alpha = (e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y) / 200;
+
+    this.setState({
+    	updateAlpha:alpha
+    });
 	}	
 }
 
