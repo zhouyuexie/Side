@@ -3,11 +3,15 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	Image
+	Image,
+	TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
-
+import Reactotron from 'reactotron-react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
+import {jumpUseName} from "../components/RouteStack";
+import {PromiseGetArticle} from "../Update";
 
 class HomeSlider extends Component{
 	//定义属性类型
@@ -23,17 +27,46 @@ class HomeSlider extends Component{
 	render(){
 		return(
 			<Swiper style={styles.container} height={170} autoplay={true}>
-				<View style={styles.slider}>
-					<Image style={styles.img} source={require("../assest/banner1_sy.png")} />
-				</View>
-				<View style={styles.slider}>
-					<Image style={styles.img} source={require("../assest/banner1_sy.png")} />
-				</View>
-				<View style={styles.slider}>
-					<Image style={styles.img} source={require("../assest/banner1_sy.png")} />
-				</View>
+				{this.props.HomeSlider.map((data)=>{
+					return this._renderImage(data);
+				})}
 			</Swiper>
 		)
+	}
+	_renderImage(data){
+		return (
+			<TouchableOpacity
+				key={data.id}
+				style={styles.slider}
+				onPress={()=>{this._onPress(data.reqType,data.url,data.title,data.isDirect)}}
+				activeOpacity={1}>
+				<Image style={styles.img} source={{uri:data.pUrl}} />
+			</TouchableOpacity>
+		)
+	}
+	_onPress(reqType,url,title,isDirect){
+		// reqType是true的时候需要用原生界面打开url界面,否则用网页打开
+		const { RootNavigator } = this.props;
+		if(reqType){
+			let page = JSON.parse(url);
+			jumpUseName(RootNavigator,page.pageName,page.message);
+		}
+		else{
+			// 文章有些事存储到后台服务器,需要获取html格式数据然后用webview展示,而另一种是需要用webview打开的网页链接url
+			if(isDirect){
+				// 网页链接
+				jumpUseName(RootNavigator,"ReadArticle",{source:url,title:title,isWeb:true});
+			}
+			else{
+				// 获取文章数据跳过去
+				PromiseGetArticle(url).then((data)=>{
+					jumpUseName(RootNavigator,"ReadArticle",{source:data.content,title:title,isWeb:false});
+				}).catch((e)=>{
+					// 记录错误
+				});
+			}
+			
+		}
 	}
 	componentWillMount(){
 		
@@ -60,4 +93,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeSlider;
+function select(store){
+	return {
+		HomeSlider:store.homeStore.HomeSlider,
+	}
+}
+
+export default connect(select)(HomeSlider);

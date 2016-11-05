@@ -26,7 +26,8 @@ const ReadArticle = React.createClass({
 	},
 	getDefaultProps(){
 		return {
-			articles:[]
+			articles:[],
+			isWeb:false
 		}
 	},
 	getInitialState(){
@@ -36,13 +37,27 @@ const ReadArticle = React.createClass({
 	},
 	render(){
 		const {RootNavigator} = this.props;
-		console.log(this.props.source)
-		return(
-			<View style={styles.root}>
-				<WebView onLoad={()=>{}} source={{html:this.props.source}} />
-			</View>
-		)
+
+		return this._renderWeb(this.props.isWeb)
 	},
+	_renderWeb(isWeb){
+		// 如果是网页的话
+		if(isWeb){
+			return(
+				<View style={styles.root}>
+					<WebView onLoad={()=>{}} source={{uri:this.props.source}} />
+				</View>
+			)
+		}
+		else{
+			// 传进来的是html字符串
+			return(
+				<View style={styles.root}>
+					<WebView onLoad={()=>{}} source={{html:this.props.source}} />
+				</View>
+			)
+		}
+	}
 })
 
 const styles = StyleSheet.create({

@@ -30,6 +30,23 @@ export const PromiseEmptyHomeData =  (props)=>{
 	});
 }
 
+// 获取文章(公众号)数据
+export const PromiseGetArticle = (Link)=>{
+	return new Promise((resolve,reject)=>{
+		fetch(Link, {
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			}
+		}).then((response)=>response.json()).then((res)=>{
+			resolve(res.data);
+		}).catch((e)=>{
+			reject(e);
+		});
+	})
+}
+
 // 启动时候检查
 // export default function Update(props,_Ready){
 // 	const {HomeList,dispatch,Link} = props;
