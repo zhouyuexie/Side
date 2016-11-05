@@ -33,11 +33,10 @@ export function GetHomeIndexData(){
 		fetch(Link.HomeIndex)
 			.then((response)=>response.json())
 			.then((res)=>{
-				dispatch({"type":HOME.GET_SLIDER,HomeSlider:res.data.carousels});
-				dispatch({"type":HOME.GET_MENU,HomeSlider:res.data.navs});
-				dispatch({"type":HOME.GET_VIDEO,HomeSlider:res.data.videos});
-				dispatch({"type":HOME.GET_LIST,HomeSlider:res.data.docs});
-				dispatch({"type":APPSTATUS.HOMEDATAREADY,HomeDataReady:true});//首页数据准备完成,可以开始进入页面
+				dispatch({"type":HOME.GET_SLIDER,HomeSlider:res.data.carousels,});
+				dispatch({"type":HOME.GET_MENU,HomeMenu:res.data.navs});
+				dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.data.videos});
+				dispatch({"type":HOME.GET_LIST,HomeList:res.data.docs});
 			})
 			.catch((error)=>{
 				// dispatch({"type":HOME.LOG_ERROR,"error":error});

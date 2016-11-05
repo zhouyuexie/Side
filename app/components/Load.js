@@ -72,15 +72,28 @@ class Load extends Component{
 	}
 	isCustom(){
 		// 是否有子元素
+		let AnimatedWay = this._upORdown();
 		if(this.props.hasChildren){
 			return (
-				<Animated.View>
+				<Animated.View style={{flex:1,transform:[
+					{
+						translateY:this.state.fadeIn.interpolate({
+							inputRange:[0,1],
+							outputRange:AnimatedWay.in
+						})
+					},
+					{
+						translateY:this.state.fadeOut.interpolate({
+							inputRange:[0,1],
+							outputRange:AnimatedWay.out
+						})
+					}
+				]}}>
 					{React.cloneElement(this.props.children)}
 				</Animated.View>
 			)
 		}
 		else{
-			let AnimatedWay = this._upORdown();
 			return (
 				<Animated.View style={{flex:1,transform:[
 					{
@@ -107,8 +120,8 @@ class Load extends Component{
 		let AnimatedWay = {};
 		switch(this.props.fadeWay){
 			case "up":
-				AnimatedWay.in = [0,Height/2-80];
-				AnimatedWay.out = [0,-(Height/2-80)];
+				AnimatedWay.in = [-120,Height/2];
+				AnimatedWay.out = [-120,-(Height/2)];
 				break;
 			case "down":
 				AnimatedWay.in = [Height,-(Height/2+100)];
@@ -237,32 +250,32 @@ class Load extends Component{
 const styles = StyleSheet.create({
 	container: {
 		position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
+		top: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
+		backgroundColor: 'transparent',
+		justifyContent: 'center',
 		// backgroundColor:"rgba(255,255,255,0.9)",
 		// backgroundColor:"#3ca7f4",
 	},
 	center:{
 		position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#000000',
-    opacity: 0.6,
-    justifyContent: 'center',
-    alignItems:"center"
+		top: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
+		backgroundColor: '#000000',
+		opacity: 0.6,
+		justifyContent: 'center',
+		alignItems:"center"
 	},
 	img:{
 		width:150,
 		height:150,
 		borderRadius:20,
 		resizeMode:"cover",
-    backgroundColor: 'transparent',
+		backgroundColor: 'transparent',
 	},
 	close:{
 		position:"absolute",

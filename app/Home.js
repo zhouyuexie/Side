@@ -11,6 +11,7 @@ import {
 	Navigator,
 	Alert,
 	RefreshControl,
+	TouchableOpacity,
 	Platform,
 	Image
 } from 'react-native';
@@ -29,7 +30,7 @@ import Tabs from "./components/Tabs";//底部
 import { connect } from 'react-redux';
 
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
-import {PromiseEmptyHomeData} from "./Update";
+import {GetHomeData,PromiseEmptyHomeData} from "./Update";
 import {routesNumber} from "./components/RouteStack";//路由信息
 import Load from "./components/Load";
 
@@ -72,8 +73,12 @@ class Home extends Component{
 					<PictureArticle RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
-					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
+				<Load isShow={false} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
+					<View style={{width:200,height:150,backgroundColor:"#fff"}}>
+						<TouchableOpacity style={{backgroundColor:"#fff"}}>
+							<Text style={{color:"#000"}}>关闭</Text>
+						</TouchableOpacity>
+					</View>
 				</Load>
 				<Tabs RootNavigator={RootNavigator} onselect={0} />
 			</View>
@@ -114,16 +119,16 @@ class Home extends Component{
 		
 	}
 	_onRefresh(){
-		this.refs.Load.setTimeClose();
-		PromiseEmptyHomeData(this.props);
-		// this.setState({isRefreshing:true});
-		// PromiseRefreshing(this.props).then(()=>{
-		// 	this.refs.Load.setTimeClose();
-		// 	this.setState({
-		// 		isRefreshing:false
-		// 	});
-		// 	// Alert.alert("列表刷新完毕","可以继续刷新");
-		// })
+		this.refs.Load.OpenLoad();
+		// PromiseEmptyHomeData(this.props);
+		this.setState({isRefreshing:true});
+		GetHomeData(this.props).then(()=>{
+			this.refs.Load.CloseLoad();
+			this.setState({
+				isRefreshing:false
+			});
+			// Alert.alert("列表刷新完毕","可以继续刷新");
+		})
 		// this.setState({isRefreshing:true});
 		// PromiseRefreshing(this.props).then(()=>{
 		// 	this.setState({

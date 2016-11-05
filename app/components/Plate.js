@@ -10,14 +10,20 @@ import {
 	TouchableOpacity,
 	ScrollView,
 	LayoutAnimation,
-	Animated
+	Animated,
+	PanResponder
 } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";
 import CardFooter from "../components/CardFooter";
 
 class Plate extends Component {
+	static get defaultProps(){
+		return {
+			title:"热门视频"
+		}
+	}
 	state={
 		width:0,//设置显示和隐藏
 		continuePull:false,//继续下来,显示不同的文本
@@ -29,14 +35,15 @@ class Plate extends Component {
 	render(){		
 		return(
 			<View style={styles.container}>
-				<Text style={styles.title}>热门视频</Text>
-        <ScrollView 
-        	style={styles.imageItem} 
-        	horizontal={true}
-        	scrollEventThrottle={150}
-        	showsHorizontalScrollIndicator={false}
-        	onScroll={(e)=>{this._handleScroll(e)}}
-        	>
+				<Text style={styles.title}>{this.props.title}</Text>
+				<ScrollView 
+					style={styles.imageItem} 
+					horizontal={true}
+					scrollEventThrottle={150}
+					showsHorizontalScrollIndicator={false}
+					{...this._panResponder.panHandlers}
+					onScroll={(e)=>{this._handleScroll(e)}}
+					>
 					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
 					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
 					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
@@ -49,7 +56,7 @@ class Plate extends Component {
 					<Text style={[styles.continuetext,{width:this.state.width}]}>{this.state.continuePull?"即将起飞":"起飞准备"}</Text>
 				</Animated.View>
 				<CardFooter name="十分钟教会你化妆" time="20分钟之前" comment="45" />
-    	</View>
+			</View>
 		)
 	}
 	_handleScroll(e){
@@ -92,7 +99,42 @@ class Plate extends Component {
 		}
 	}
 	componentWillMount(){
-		
+		this._panResponder = PanResponder.create({
+			// 要求成为响应者：
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onPanResponderTerminationRequest: (evt, gestureState) => false,
+
+			onPanResponderGrant: (evt, gestureState) => {
+				// 开始手势操作。给用户一些视觉反馈，让他们知道发生了什么事情！
+				Reactotron.log("onPanResponderGrant")
+				// gestureState.{x,y}0 现在会被设置为0
+			},
+			onPanResponderMove: (evt, gestureState) => {
+				// 最近一次的移动距离为gestureState.move{X,Y}
+				Reactotron.log("onPanResponderMove")
+				// 从成为响应者开始时的累计手势移动距离为gestureState.d{x,y}
+			},
+			onPanResponderRelease: (evt, gestureState) => {
+				// 用户放开了所有的触摸点，且此时视图已经成为了响应者。
+				// 一般来说这意味着一个手势操作已经成功完成。
+				Reactotron.log("onPanResponderRelease")
+			},
+			onPanResponderEnd:(evt, gestureState)=>{
+				Reactotron.log("onPanResponderEnd")
+			},
+			onPanResponderTerminate: (evt, gestureState) => {
+				// 另一个组件已经成为了新的响应者，所以当前手势将被取消。
+				Reactotron.log("onPanResponderTerminate")
+			},
+			onShouldBlockNativeResponder: (evt, gestureState) => {
+				// 返回一个布尔值，决定当前组件是否应该阻止原生组件成为JS响应者
+				// 默认返回true。目前暂时只支持android。
+				return true;
+			},
+		});
 	}
 	componentDidMount(){
 		
@@ -102,12 +144,12 @@ class Plate extends Component {
 const styles = StyleSheet.create({
 	container:{
 		width:Width,
-    justifyContent: "space-around",
-    backgroundColor: "#FFF", 
-    paddingTop:15,
-    paddingBottom:10,
-    paddingLeft:10,
-    marginTop:10,
+		justifyContent: "space-around",
+		backgroundColor: "#FFF", 
+		paddingTop:15,
+		paddingBottom:10,
+		paddingLeft:10,
+		marginTop:10,
 	},
 	title:{
 		fontSize:15,
@@ -123,8 +165,8 @@ const styles = StyleSheet.create({
 		marginRight:8,
 	},
 	bottomText:{
-    flexDirection:'row',
-    position:"relative",
+		flexDirection:'row',
+		position:"relative",
 	},
 	left:{
 		justifyContent: "flex-start",
