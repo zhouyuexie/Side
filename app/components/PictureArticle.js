@@ -27,14 +27,14 @@ class PictureArticle extends Component {
 			
 		}
 	}	
-	render(){		
+	render(){
 		return(
 			<View style={styles.container}>
 				<View style={styles.content}>
-					<Text style={styles.title}>这样真的好吗？外来的万圣节从幼儿园就开始普及，而传统的节日却没有这么大的影响力。</Text>
-					<Image style={styles.image} source={require('../assest/2_product_pic.png')} />
+					<Text numberOfLines={3} style={styles.title}>{this.props.Title}</Text>
+					<Image style={styles.image} source={{uri:this.props.Avatar}} />
         </View>
-				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
+				<CardFooter name={this.props.Author} readnumber={this.props.ReadCount} isPost={true} time={this.props.MTime} comment={this.props.CmtCount} />
     	</View>
 		)
 	}
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     paddingBottom:10,
     paddingLeft:10,
     marginTop:10,
-    marginBottom:50,
 	},
 	content:{
 		flexDirection:'row',

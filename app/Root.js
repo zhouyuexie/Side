@@ -18,7 +18,7 @@ const InteractionManager = require('InteractionManager');
 
 import {Routes} from "./components/RouteStack";//路由栈
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
-import {GetHomeData,ChangeHomeReady} from "./Update";
+import {GetHomeData,ChangeHomeReady,PromiseEmptyHomeData} from "./Update";
 
 class Root extends Component {
 	state = {
@@ -64,7 +64,8 @@ class Root extends Component {
 				setTimeout(()=>{
 					this.setState({ready:true});
 				},2000);
-			})
+			}),
+			// PromiseEmptyHomeData(this.props)
 		]);
 		// InteractionManager.runAfterInteractions(()=>{
 		// 	GetHomeData(this.props).then(()=>{

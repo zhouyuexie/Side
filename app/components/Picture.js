@@ -15,22 +15,45 @@ import Reactotron from 'reactotron-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import CardFooter from "../components/CardFooter";
+import {PromiseGetData} from "../Update";
+import {jumpUseName} from "../components/RouteStack";
 
 class Picture extends Component {	
-	render(){		
+	render(){
+		let Avatar = this.props.Avatar;
+		let image = Avatar.split(",");//获取图片
 		return(
 			<View style={styles.container}>
-				<Text style={styles.title}>xx人都想知道的当地60种超赞小吃，史上最虐心美食~</Text>
+				<Text style={styles.title}>{this.props.Title}</Text>
         <ScrollView contentContainerStyle={styles.imageItem} horizontal = {true} showsHorizontalScrollIndicator = {false}>
-					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
-					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
-					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
-					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
+					{image.map((data)=>{
+						return this._renderImage(data);
+					})}
 				</ScrollView>
-				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
+				<CardFooter name={this.props.Author} readnumber={this.props.ReadCount} isPost={true} time={this.props.MTime} comment={this.props.CmtCount} />
     	</View>
 		)
 	}
+	_renderImage(data){
+		return (
+			<Image key={data} source={{uri:data.Url}} style={styles.image} />
+			/*<TouchableOpacity
+				activeOpactivy={1}
+				key={"Picture"+data.Id}
+				onPress={()=>{this._onPress(data.Url,data.Title)}}>
+				
+			</TouchableOpacity>*/
+		)
+	}
+	// _onPress(Url,Title){
+	// 	const { RootNavigator } = this.props;
+	// 	// 获取文章数据跳过去
+	// 	PromiseGetData(Url).then((data)=>{
+	// 		jumpUseName(RootNavigator,"WebPage",{source:data.content,title:Title,isWeb:false});
+	// 	}).catch((e)=>{
+	// 		// 记录错误
+	// 	});
+	// }
 	componentWillMount(){
 		
 	}

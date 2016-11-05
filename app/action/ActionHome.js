@@ -38,10 +38,10 @@ export function GetHomeIndexData(){
 				.then((response)=>response.json())
 				.then((res)=>{
 					// Promise.all([])
-					dispatch({"type":HOME.GET_SLIDER,HomeSlider:res.data.carousels,});
-					dispatch({"type":HOME.GET_MENU,HomeMenu:res.data.navs});
-					dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.data.videos});
-					dispatch({"type":HOME.GET_LIST,HomeList:res.data.docs});
+					dispatch({"type":HOME.GET_SLIDER,HomeSlider:res.Data.Carousels});
+					dispatch({"type":HOME.GET_MENU,HomeMenu:res.Data.Navs});
+					dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.Data.Videos});
+					dispatch({"type":HOME.GET_LIST,HomeList:res.Data.Docs});
 					resolve();
 				})
 				.catch((error)=>{

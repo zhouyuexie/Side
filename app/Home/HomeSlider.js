@@ -36,9 +36,9 @@ class HomeSlider extends Component{
 	_renderImage(data){
 		return (
 			<TouchableOpacity
-				key={data.Id}
+				key={"HomeSilder"+data.Id}
 				style={styles.slider}
-				onPress={()=>{this._onPress(data.reqType,data.url,data.title,data.isDirect)}}
+				onPress={()=>{this._onPress(data.ReqType,data.Url,data.Title,data.IsDirect)}}
 				activeOpacity={1}>
 				<Image style={styles.img} source={{uri:data.PUrl}} />
 			</TouchableOpacity>

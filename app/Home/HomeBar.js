@@ -56,12 +56,12 @@ class HomeBar extends Component {
 	_renderMenu(data){
 		return (
 			<TouchableOpacity 
-				key={data.id} 
+				key={data.Id} 
 				activeOpacity={0.8} 
 				style={styles.align}
-				onPress={()=>{this._onPress(data.title,data.url,data.reqType)}}>
-				<Image source={{uri:data.purl}} style={styles.image} />
-				<Text style={styles.text}>{data.title}</Text>
+				onPress={()=>{this._onPress(data.Title,data.Url,data.ReqType)}}>
+				<Image source={{uri:data.Purl}} style={styles.image} />
+				<Text style={styles.text}>{data.Title}</Text>
 			</TouchableOpacity>
 		)
 	}

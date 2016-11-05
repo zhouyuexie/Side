@@ -22,11 +22,8 @@ import HomeSearch from "./Home/HomeSearch"//搜索
 import HomeSlider from "./Home/HomeSlider";//轮播图
 import HomeBar from "./Home/HomeBar";//标头
 import Plate from "./components/Plate";//板块
-import Picture from "./components/Picture";//全是图片
-import Post from "./components/Post"//资讯,没有图
-import PictureArticle from "./components/PictureArticle";//图文信息
 import Tabs from "./components/Tabs";//底部
-
+import HomeShow from "./Home/HomeShow";//根据数据来判断使用何种方式展示数据
 import { connect } from 'react-redux';
 
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
@@ -68,9 +65,7 @@ class Home extends Component{
 					<HomeSlider RootNavigator={RootNavigator} />
 					<HomeBar RootNavigator={RootNavigator} />
 					<Plate RootNavigator={RootNavigator} />
-					<Picture RootNavigator={RootNavigator} />
-					<Post RootNavigator={RootNavigator} />
-					<PictureArticle RootNavigator={RootNavigator} />
+					<HomeShow  RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
 				<Load isShow={false} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
@@ -150,11 +145,12 @@ class Home extends Component{
 const styles = StyleSheet.create({
 	root:{
 		flex:1,
-		backgroundColor: "#fff", 
+		backgroundColor: "#fff",
 	},
 	container:{
 		marginTop:55,
-		backgroundColor: "#d5d5d5", 
+		backgroundColor: "#d5d5d5",
+    marginBottom:50,
 	}
 });
 

@@ -15,13 +15,14 @@ import {
 } from 'react-native';
 import Reactotron from 'reactotron-react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
 import {jumpUseName} from "../components/RouteStack";
-import CardFooter from "../components/CardFooter";
 
 class Plate extends Component {
 	static get defaultProps(){
 		return {
-			title:"热门视频"
+			HeadTitle:"热门视频"
 		}
 	}
 	state={
@@ -35,7 +36,7 @@ class Plate extends Component {
 	render(){		
 		return(
 			<View style={styles.container}>
-				<Text style={styles.title}>{this.props.title}</Text>
+				<Text style={styles.title}>{this.props.HeadTitle}</Text>
 				<ScrollView 
 					style={styles.imageItem} 
 					horizontal={true}
@@ -44,10 +45,9 @@ class Plate extends Component {
 					{...this._panResponder.panHandlers}
 					onScroll={(e)=>{this._handleScroll(e)}}
 					>
-					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
-					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
-					<Image source={require('../assest/1_product_pic.png')} style={styles.image} />
-					<Image source={require('../assest/2_product_pic.png')} style={styles.image} />
+					{this.props.HomeVideo.map((data)=>{
+						return this._renderPlate(data);
+					})}
 				</ScrollView>
 				<View style={styles.containimg}>
 					<Image style={[styles.continueimg,{width:this.state.imgwidth}]} source={require("../assest/plane.png")}></Image>
@@ -55,9 +55,29 @@ class Plate extends Component {
 				<Animated.View style={styles.continue}>
 					<Text style={[styles.continuetext,{width:this.state.width}]}>{this.state.continuePull?"即将起飞":"起飞准备"}</Text>
 				</Animated.View>
-				<CardFooter name="十分钟教会你化妆" time="20分钟之前" comment="45" />
 			</View>
 		)
+	}
+	_renderPlate(data){
+		return (
+			<TouchableOpacity 
+				style={styles.body}
+				activeOpacity={1}
+				key={data.Id}
+				onPress={()=>{this._onPress(data.Title,data.Url,data.Author)}}>
+				<Image source={{uri:data.Avatar}} style={styles.image} />
+				<Text numberOfLines={1} style={styles.bodytext}>{data.Title}</Text>
+				<View style={styles.footer}>
+					<Icon name="eye" size={14} color="#A4A4A4" />
+					<Text style={styles.footertext}>{data.ReadCount}</Text>
+					<Icon name="commenting-o" size={14} color="#A4A4A4" />
+					<Text style={styles.footertext}>{data.CmtCount}</Text>
+				</View>
+			</TouchableOpacity>
+		)
+	}
+	_onPress(Title,Url,Author){
+		
 	}
 	_handleScroll(e){
 		// LayoutAnimation.easeInEaseOut();
@@ -147,7 +167,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-around",
 		backgroundColor: "#FFF", 
 		paddingTop:15,
-		paddingBottom:10,
+		paddingBottom:5,
 		paddingLeft:10,
 		marginTop:10,
 	},
@@ -160,9 +180,10 @@ const styles = StyleSheet.create({
 		marginBottom:8,
 	},
 	image:{
-		width:Width/3+5,
-		height:Width/4,
+		width:140,
+		height:100,
 		marginRight:8,
+		resizeMode:"cover"
 	},
 	bottomText:{
 		flexDirection:'row',
@@ -211,7 +232,32 @@ const styles = StyleSheet.create({
 		backgroundColor:"transparent",
 		position:"absolute",
 		right:0
+	},
+	body:{
+		flexDirection:"column",
+		width:150
+	},
+	bodytext:{
+		fontSize:14,
+		color:"#444",
+		marginTop:5
+	},
+	footer:{
+		flexDirection:"row",
+		marginTop:5
+	},
+	footertext:{
+		color:"#999",
+		marginRight:10,
+		marginLeft:2,
+		fontSize:12
 	}
 });
 
-export default Plate;
+function select(store){
+	return {
+		HomeVideo:store.homeStore.HomeVideo,
+	}
+}
+
+export default connect(select)(Plate);

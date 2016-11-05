@@ -20,17 +20,11 @@ class Post extends Component {
 	render(){		
 		return(
 			<View style={styles.container}>
-				<Text style={styles.title}>这样真的好吗？外来的万圣节从幼儿园就开始普及，而传统的节日却没有这么大的影响力。</Text>
-        <Text style={styles.content}>看到朋友圈、新闻发的全是幼儿园过万圣节，有的有的小朋友还被扮相逼真的小老朋友吓哭，总觉得这种外来的...</Text>
-				<CardFooter name="zhouzhou" isPost={true} time="20分钟之前" comment="45" />
+				<Text style={styles.title}>{this.props.Title}</Text>
+        <Text numberOfLines={3} style={styles.content}>{this.props.Content}</Text>
+				<CardFooter name={this.props.Author} readnumber={this.props.ReadCount} isPost={true} time={this.props.MTime} comment={this.props.CmtCount} />
     	</View>
 		)
-	}
-	componentWillMount(){
-		
-	}
-	componentDidMount(){
-		
 	}
 }
 
