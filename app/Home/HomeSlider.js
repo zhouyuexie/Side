@@ -11,7 +11,7 @@ import Swiper from 'react-native-swiper';
 import Reactotron from 'reactotron-react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";
-import {PromiseGetArticle} from "../Update";
+import {PromiseGetData} from "../Update";
 
 class HomeSlider extends Component{
 	//定义属性类型
@@ -59,7 +59,7 @@ class HomeSlider extends Component{
 			}
 			else{
 				// 获取文章数据跳过去
-				PromiseGetArticle(url).then((data)=>{
+				PromiseGetData(url).then((data)=>{
 					jumpUseName(RootNavigator,"ReadArticle",{source:data.content,title:title,isWeb:false});
 				}).catch((e)=>{
 					// 记录错误

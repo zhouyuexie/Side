@@ -30,8 +30,8 @@ export const PromiseEmptyHomeData =  (props)=>{
 	});
 }
 
-// 获取文章(公众号)数据
-export const PromiseGetArticle = (Link)=>{
+// 根据传入的url获取数据然后返回(通用时间)
+export const PromiseGetData = (Link)=>{
 	return new Promise((resolve,reject)=>{
 		fetch(Link, {
 			method: 'GET',
