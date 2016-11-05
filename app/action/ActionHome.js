@@ -23,23 +23,31 @@ export function ChangeList(){
 // 清空首页全部数据
 export function EmptyHomeData(){
 	return (dispatch) => {
-		dispatch({"type":HOME.DMPTYDATA});
+		return new Promise((resolve,reject)=>{
+			dispatch({"type":HOME.DMPTYDATA});
+			resolve();
+		});
 	}
 }
 
 // 获取首页数据
 export function GetHomeIndexData(){
 	return (dispatch) => {
-		fetch(Link.HomeIndex)
-			.then((response)=>response.json())
-			.then((res)=>{
-				dispatch({"type":HOME.GET_SLIDER,HomeSlider:res.data.carousels,});
-				dispatch({"type":HOME.GET_MENU,HomeMenu:res.data.navs});
-				dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.data.videos});
-				dispatch({"type":HOME.GET_LIST,HomeList:res.data.docs});
-			})
-			.catch((error)=>{
-				// dispatch({"type":HOME.LOG_ERROR,"error":error});
-			})
+		return new Promise((resolve,reject)=>{
+			fetch(Link.HomeIndex)
+				.then((response)=>response.json())
+				.then((res)=>{
+					// Promise.all([])
+					dispatch({"type":HOME.GET_SLIDER,HomeSlider:res.data.carousels,});
+					dispatch({"type":HOME.GET_MENU,HomeMenu:res.data.navs});
+					dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.data.videos});
+					dispatch({"type":HOME.GET_LIST,HomeList:res.data.docs});
+					resolve();
+				})
+				.catch((error)=>{
+					// dispatch({"type":HOME.LOG_ERROR,"error":error});
+					reject(error)
+				})
+		})
 	}
 }

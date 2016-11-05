@@ -65,7 +65,7 @@ const Articles = React.createClass({
 				'Content-Type': 'application/json',
 			}
 		}).then((response)=>response.json()).then((res)=>{
-			jumpUseName(RootNavigator,"ReadArticle",res.data);
+			jumpUseName(RootNavigator,"WebPage",res.data);
 		}).catch((e)=>{
 			Reactotron.log(e);
 		});

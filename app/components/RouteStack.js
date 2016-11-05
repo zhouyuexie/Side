@@ -10,7 +10,7 @@ import Log from "../page/Log";//登录页
 import Products from "../page/Products";//产品页
 import TimeKill from "../page/TimeKill";//秒杀页
 import Articles from "../page/Articles";//文章页
-import ReadArticle from "../page/ReadArticle";//阅读文章页
+import WebPage from "../page/WebPage";//阅读文章页
 import MainTabs from "../MainTabs";//测试主页切换
 import Test from "../Test";//测试页
 // import AnimationInit from "react-native-navigator-animation";
@@ -49,8 +49,8 @@ export const Routes = {
 	Articles:{
 		name:"Articles",component:Articles,index:6,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
-	ReadArticle:{
-		name:"ReadArticle",component:ReadArticle,index:7,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+	WebPage:{
+		name:"WebPage",component:WebPage,index:7,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	MainTabs:{
 		name:"MainTabs",component:MainTabs,index:8,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}

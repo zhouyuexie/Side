@@ -55,11 +55,22 @@ class Root extends Component {
 			 this.state.fadeAnim,    // The value to drive
 			 {toValue: 1},           // Configuration
 		 ).start();                // Don't forget start!
-		InteractionManager.runAfterInteractions(()=>{
+		// 全部执行完成才能进入界面
+		Promise.all([
 			GetHomeData(this.props).then(()=>{
-				this.setState({ready:true})
-			});//获取首页数据,获取到数据后会更新HomeDataReady,然后就可以进入app界面
-		})
+				Promise.resolve();
+			}),//获取首页数据,获取到数据后会更新HomeDataReady,然后就可以进入app界面
+			new Promise((resolve,reject)=>{
+				setTimeout(()=>{
+					this.setState({ready:true});
+				},2000);
+			})
+		]);
+		// InteractionManager.runAfterInteractions(()=>{
+		// 	GetHomeData(this.props).then(()=>{
+		// 		this.setState({ready:true})
+		// 	});//获取首页数据,获取到数据后会更新HomeDataReady,然后就可以进入app界面
+		// })
 		
 	}
 }

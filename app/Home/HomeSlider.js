@@ -36,11 +36,11 @@ class HomeSlider extends Component{
 	_renderImage(data){
 		return (
 			<TouchableOpacity
-				key={data.id}
+				key={data.Id}
 				style={styles.slider}
 				onPress={()=>{this._onPress(data.reqType,data.url,data.title,data.isDirect)}}
 				activeOpacity={1}>
-				<Image style={styles.img} source={{uri:data.pUrl}} />
+				<Image style={styles.img} source={{uri:data.PUrl}} />
 			</TouchableOpacity>
 		)
 	}
@@ -55,12 +55,12 @@ class HomeSlider extends Component{
 			// 文章有些事存储到后台服务器,需要获取html格式数据然后用webview展示,而另一种是需要用webview打开的网页链接url
 			if(isDirect){
 				// 网页链接
-				jumpUseName(RootNavigator,"ReadArticle",{source:url,title:title,isWeb:true});
+				jumpUseName(RootNavigator,"WebPage",{source:url,title:title,isWeb:true});
 			}
 			else{
 				// 获取文章数据跳过去
 				PromiseGetData(url).then((data)=>{
-					jumpUseName(RootNavigator,"ReadArticle",{source:data.content,title:title,isWeb:false});
+					jumpUseName(RootNavigator,"WebPage",{source:data.content,title:title,isWeb:false});
 				}).catch((e)=>{
 					// 记录错误
 				});

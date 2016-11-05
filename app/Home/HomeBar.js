@@ -12,6 +12,7 @@ import {
 	LayoutAnimation,
 	Alert
 } from 'react-native';
+import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";//路由栈
@@ -20,7 +21,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class HomeBar extends Component {	
 	//定义属性类型
 	propTypes:{
-		Menu:PropTypes.array.isRequired
+		HomeMenu:PropTypes.array.isRequired
 	}
 	constructor(props){
 		super(props);
@@ -30,13 +31,13 @@ class HomeBar extends Component {
 	}
 	static get defaultProps(){
 		return {
-			Menu:["身边事","车票预订","身边视频","生活114","非诚勿扰","招聘求职","房屋租售","吃喝玩乐"]
+			
 		}
 	}
 	render(){
-		let length = this.props.Menu.length/2;
-		let top = this.props.Menu.slice(0,length);
-		let down = this.props.Menu.slice(length);
+		let length = this.props.HomeMenu.length/2;
+		let top = this.props.HomeMenu.slice(0,length);
+		let down = this.props.HomeMenu.slice(length);
 		return(
 			<View style={styles.container}>
 				<View style={styles.topdown}>
@@ -55,17 +56,26 @@ class HomeBar extends Component {
 	_renderMenu(data){
 		return (
 			<TouchableOpacity 
-				key={data} 
+				key={data.id} 
 				activeOpacity={0.8} 
 				style={styles.align}
-				onPress={()=>{this._onPress(data)}}>
-				<Image source={require('../assest/icon_5_self.png')} style={styles.image} />
-				<Text style={styles.text}>{data}</Text>
+				onPress={()=>{this._onPress(data.title,data.url,data.reqType)}}>
+				<Image source={{uri:data.purl}} style={styles.image} />
+				<Text style={styles.text}>{data.title}</Text>
 			</TouchableOpacity>
 		)
 	}
-	_onPress(data){
-		Alert.alert("你点击了",data)
+	_onPress(title,url,reqType){
+		// reqType为true说明是原生页面展示
+		const { RootNavigator } = this.props;
+		if(reqType){
+			let page = JSON.parse(url);
+			jumpUseName(RootNavigator,page.pageName,page.message);
+		}
+		else{
+			jumpUseName(RootNavigator,"WebPage",{source:url,title:title,isWeb:true});
+		}
+		Alert.alert("你点击了",title)
 	}
 	componentWillMount(){
 		
@@ -83,7 +93,9 @@ const styles = StyleSheet.create({
 		alignItems:"center",
 		backgroundColor: "#FFF", 
 		marginTop:10,
-		flexWrap:"wrap"
+		flexWrap:"wrap",
+		paddingTop:10,
+		paddingBottom:10
 	},
 	align:{
 		alignItems:"center",
@@ -91,8 +103,8 @@ const styles = StyleSheet.create({
 		flex:1,
 	},
 	image:{
-		width:45,
-		height:45,
+		width:40,
+		height:40,
 		marginBottom:5,
 		resizeMode: "contain",
 	},
@@ -107,4 +119,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default HomeBar;
+function select(store){
+	return {
+		HomeMenu:store.homeStore.HomeMenu,
+	}
+}
+
+export default connect(select)(HomeBar);
