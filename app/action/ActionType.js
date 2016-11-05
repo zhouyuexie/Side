@@ -23,6 +23,7 @@ export const HOME = {
 	GET_MENU:"GET_MENU",//菜单
 	GET_VIDEO:"GET_VIDEO",//视频
 	GET_LIST:"GET_LIST",//列表
+	DMPTYDATA:"DMPTYDATA",//清空首页数据
 }
 
 // Seller页面配置设置

@@ -27,10 +27,9 @@ import PictureArticle from "./components/PictureArticle";//图文信息
 import Tabs from "./components/Tabs";//底部
 
 import { connect } from 'react-redux';
-import {ChangeHomeDataReady} from './action/ActionAppStatus';
 
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
-import {Refreshing,PromiseRefreshing} from "./Update";
+import {PromiseEmptyHomeData} from "./Update";
 import {routesNumber} from "./components/RouteStack";//路由信息
 import Load from "./components/Load";
 
@@ -73,7 +72,7 @@ class Home extends Component{
 					<PictureArticle RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={false} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
+				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
 					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
 				</Load>
 				<Tabs RootNavigator={RootNavigator} onselect={0} />
@@ -106,7 +105,7 @@ class Home extends Component{
 		}
 	}
 	componentDidMount(){
-		// this.refs.Load.setTimeClose();
+		this.refs.Load.setTimeClose();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
@@ -116,6 +115,7 @@ class Home extends Component{
 	}
 	_onRefresh(){
 		this.refs.Load.setTimeClose();
+		PromiseEmptyHomeData(this.props);
 		// this.setState({isRefreshing:true});
 		// PromiseRefreshing(this.props).then(()=>{
 		// 	this.refs.Load.setTimeClose();

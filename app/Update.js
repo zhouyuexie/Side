@@ -1,6 +1,6 @@
 // 升级配置
 import Reactotron from 'reactotron-react-native';//测试
-import { GetHomeIndexData } from './action/ActionHome';
+import { GetHomeIndexData,EmptyHomeData } from './action/ActionHome';
 import {ChangeHomeDataReady} from "./action/ActionAppStatus";
 
 // 检查版本信息
@@ -21,14 +21,14 @@ export const GetHomeData =  (props)=>{
 	});
 }
 
-// 改变HomeDataReady
-// export const ChangeHomeReady =  (props,status)=>{
-// 	return new Promise((resolve,reject)=>{
-// 		const {dispatch} = props;
-// 		dispatch(ChangeHomeDataReady(status));
-// 		resolve();
-// 	});
-// }
+// 清空首页数据
+export const PromiseEmptyHomeData =  (props)=>{
+	return new Promise((resolve,reject)=>{
+		const {dispatch} = props;
+		dispatch(EmptyHomeData());
+		resolve();
+	});
+}
 
 // 启动时候检查
 // export default function Update(props,_Ready){

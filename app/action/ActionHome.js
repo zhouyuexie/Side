@@ -20,9 +20,10 @@ export function ChangeList(){
 	}
 }
 
-export function EmptyList(){
+// 清空首页全部数据
+export function EmptyHomeData(){
 	return (dispatch) => {
-		dispatch({"type":HOME.GET_LIST,HomeList:[]});
+		dispatch({"type":HOME.DMPTYDATA});
 	}
 }
 

@@ -63,7 +63,7 @@ class Load extends Component{
 		// 	return null;
 		// }
 		return (
-			<View style={[styles.container,{zIndex:this.props.isShow?this.state.zIndex:-10}]}>
+			<View style={[styles.container,{zIndex:this.state.zIndex}]}>
 				<Animated.View style={[styles.center,{backgroundColor:this.props.bgColor,opacity:this.state.fadeAnim}]}>
 					{this.isCustom()}
 				</Animated.View>
@@ -174,16 +174,21 @@ class Load extends Component{
 			});
 			// 动画放后面是因为要先显示,否则动画执行开始用户无法看到
 			this.state.fadeAnim.setValue(0);
-			Animated.timing(this.state.fadeAnim,{toValue:this.props.opacity}).start();
+			Animated.timing(this.state.fadeAnim,{toValue:this.props.opacity}).start(()=>{
+				this._StartAnimate();
+			});
 		}
 		else{
 			this.state.fadeAnim.setValue(this.props.opacity);//初始化为用户定义的值
-			Animated.timing(this.state.fadeAnim,{toValue:0}).start(()=>{
-				this.setState({
-					zIndex:-10
+			this._EndAnimate(()=>{
+				Animated.timing(this.state.fadeAnim,{toValue:0}).start(()=>{
+					this.setState({
+						zIndex:-10
+					});
+					// 动画执行完再隐藏
 				});
-				// 动画执行完再隐藏
 			});
+			
 		}
 	}
 	_DefaultAnimate(status){

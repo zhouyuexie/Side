@@ -27,6 +27,15 @@ export default function ReducerHome(state=Home,action){
 				...state,
 				HomeList:action.HomeList
 			}
+		case HOME.DMPTYDATA:
+			// 清空所有数据,除了链接
+			return {
+				Link:state.Link,//这个不清空
+				HomeSlider:[],
+				HomeList:[],
+				HomeMenu:[],
+				HomeVideo:[]
+			}
 		default:
 			// 在 default 情况下返回旧的 state。遇到未知的 action 时，一定要返回旧的 state。
 			return state;
