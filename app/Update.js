@@ -14,11 +14,11 @@ function checkVersion(Link){
 
 // 获取首页数据
 export const GetHomeData =  (props)=>{
-	return new Promise((resolve,reject)=>{
+	// return new Promise((resolve,reject)=>{
 		const {dispatch} = props;
-		dispatch(GetHomeIndexData());
-		resolve();
-	});
+		return dispatch(GetHomeIndexData());
+		// resolve();
+	// });
 }
 
 // 清空首页数据

@@ -33,8 +33,7 @@ export function EmptyHomeData(){
 // 获取首页数据
 export function GetHomeIndexData(){
 	return (dispatch) => {
-		return new Promise((resolve,reject)=>{
-			fetch(Link.HomeIndex)
+		return fetch(Link.HomeIndex)
 				.then((response)=>response.json())
 				.then((res)=>{
 					// Promise.all([])
@@ -42,12 +41,12 @@ export function GetHomeIndexData(){
 					dispatch({"type":HOME.GET_MENU,HomeMenu:res.Data.Navs});
 					dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.Data.Videos});
 					dispatch({"type":HOME.GET_LIST,HomeList:res.Data.Docs});
-					resolve();
+					Promise.resolve("ActionHome.js");
 				})
 				.catch((error)=>{
 					// dispatch({"type":HOME.LOG_ERROR,"error":error});
-					reject(error)
+					Promise.reject(error)
 				})
-		})
+		// })
 	}
 }
