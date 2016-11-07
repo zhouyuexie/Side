@@ -65,7 +65,7 @@ class PostDetail extends Component {
 		if(isWeb){
 			return(
 				<View>
-					<WebView onLoad={()=>{}} source={{uri:this.props.source}} />
+					<WebView style={styles.webview} onLoad={()=>{}} source={{uri:this.props.source}} />
 				</View>
 			)
 		}
@@ -89,11 +89,14 @@ class PostDetail extends Component {
 const styles = StyleSheet.create({
 	root:{
 		flex:1,
-		backgroundColor: "#fff", 
+		backgroundColor: "#F0F2F6", 
 	},
 	container:{
-		marginTop:55,
-		backgroundColor: "#d5d5d5", 
+		// marginTop:55,
+		// backgroundColor: "#fff", 
+	},
+	webview:{
+		flex:1,
 	}
 });
 

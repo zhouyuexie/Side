@@ -40,31 +40,35 @@ const styles = StyleSheet.create({
 	container:{
 		width:Width,
 		flexDirection:'row',
+		alignItems:"center",
 		justifyContent: "space-between",
+		backgroundColor: "#fff",
+		paddingVertical:15,
 	},
 	left:{
-
+		flexDirection:'row',
 	},
 	image:{
-		width: 60, 
-    height: 60,
-    borderRadius: 30,
+		width: 40, 
+    height: 40,
+    borderRadius: 20,
     marginHorizontal:10
 	},
 	AuthorTime:{
-
+		justifyContent:"center",
 	},
 	Author:{
-		marginBottom:10,
+		fontSize:12,
+		// marginBottom:10,
 	},
 	Time:{
 		fontSize:12,
 		color:"#A4A4A4",
 	},
 	right:{
+		fontSize:12,
 		color:"#A4A4A4",
-		position:"absolute",
-		top:10,
-		right:15,
+		justifyContent: "flex-end",
+		marginRight:10,
 	}
 });

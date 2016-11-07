@@ -21,11 +21,11 @@ export default class CardHeader extends Component {
 				<Text style={styles.up}>{this.props.title}</Text>
 				<View style={styles.down}>
 					<View style={styles.downbody}>
-						<Icon name="eye" size={18} color="#A4A4A4" />
+						<Icon name="eye" size={16} color="#A4A4A4" />
 						<Text style={styles.text}>{this.props.time}</Text>
 					</View>
 					<View style={styles.downbody}>
-						<Icon name="commenting-o" size={16} color="#A4A4A4" />
+						<Icon name="commenting-o" size={14} color="#A4A4A4" />
 						<Text style={styles.text}>{this.props.comment}</Text>
 					</View>
 				</View>
@@ -37,16 +37,21 @@ export default class CardHeader extends Component {
 const styles = StyleSheet.create({
 	container:{
 		flex:1,
+		marginBottom:10,
+		backgroundColor: "#fff",
 	},
 	up:{
 		flex:1,
 		fontSize:14,
-		color:"#A4A4A4",
+		color:"#666",
+		lineHeight:24,
+		padding:10
 	},
 	down:{
 		flexDirection:"row",
 		alignItems:"center",
-		marginTop:15,
+		justifyContent: "flex-end",
+		marginBottom:10,
 	},
 	downbody:{
 		flexDirection:"row",
