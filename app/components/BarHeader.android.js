@@ -16,7 +16,7 @@ export default class BarHeader extends Component {
 				<Text style={styles.text}>详情</Text>
 				<View style={styles.right}>
 					<Icon style={styles.thumbs} name="thumbs-o-up" size={18} color="#41A2FF" />
-					<Icon style={styles.ellsipsis} name="ellsipsis-v" size={18} color="#41A2FF" />
+					<Icon style={styles.ellsipsis} name="ellipsis-v" size={18} color="#41A2FF" />
 				</View>
 			</View>
 		)
@@ -25,7 +25,7 @@ export default class BarHeader extends Component {
 
 const styles = StyleSheet.create({
 	container:{
-		width:Width;
+		width:Width,
 		flexDirection:'row',
 		justifyContent: "space-between",
 	},
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
 	ellsipsis:{
 
 	}
-)},
+})

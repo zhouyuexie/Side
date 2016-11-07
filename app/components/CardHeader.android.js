@@ -13,7 +13,8 @@ export default class CardHeader extends Component {
 		title:PropTypes.string.isRequired,
 		time:PropTypes.string,
 		comment:PropTypes.string
-	},
+	}
+
 	render(){
 		return (
 			<View style={styles.container}>

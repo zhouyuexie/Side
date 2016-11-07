@@ -5,7 +5,7 @@ import {
 	View,
 	TouchableOpacity,
 } from 'react-native';
-import {Width,Height,Scale} from "./DeviceInfo";//获取设备信息
+import {Width,Height,Scale} from "../../components/DeviceInfo";//获取设备信息
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class PostFoot extends Component {
@@ -29,7 +29,7 @@ export default class PostFoot extends Component {
 
 const styles = StyleSheet.create({
 	container:{
-		width:Width;
+		width:Width,
 		flexDirection:'row',
 		justifyContent: "space-between",
 	},
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 		justifyContent:"center",
 		paddingHorizontal:45,
 		paddingVertical:15
-	}
+	},
 	right:{
 		padding:15,
 		marginRight:10,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 	one:{
 		fontSize:16,
 		color:"#41A2FF",
-	}
+	},
 	four:{
 		fontSize:16,
 		color:"#41A2FF",

@@ -13,7 +13,7 @@ export default class PostFoot extends Component {
 		title:PropTypes.string.isRequired,
 		time:PropTypes.string,
 		comment:PropTypes.string
-	},
+	}
 	render(){
 		return (
 			<View style={styles.container}>
@@ -31,7 +31,7 @@ export default class PostFoot extends Component {
 
 const styles = StyleSheet.create({
 	container:{
-		width:Width;
+		width:Width,
 		flexDirection:'row',
 		justifyContent: "space-between",
 	},

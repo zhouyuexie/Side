@@ -11,10 +11,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class CardHeader extends Component {
 	propTypes:{
 		pictrue:PropTypes.array.isRequired,
-		author:PropTypes.string
+		author:PropTypes.string,
 		time:PropTypes.string,
 		floor:PropTypes.string,	//楼主、沙发、1楼
-	},
+	}
 	static get defaultProps(){
 		return {
 			
@@ -38,7 +38,7 @@ export default class CardHeader extends Component {
 
 const styles = StyleSheet.create({
 	container:{
-		width:Width;
+		width:Width,
 		flexDirection:'row',
 		justifyContent: "space-between",
 	},
