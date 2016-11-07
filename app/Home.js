@@ -137,9 +137,9 @@ class Home extends Component{
 	_handleScroll(e){
 		const contentY = e.nativeEvent.contentSize.height;//整个页面的高度
 		const nowY = e.nativeEvent.contentOffset.y;//现在顶部距离高度
-		if(nowY+Height+100>contentY){
-			// 说明快接近底部了,需要加载数据
-			
+		if(nowY+Height+100>contentY && !this.state.isLoadData){
+			// 说明快接近底部了,并且没有已经在加载的数据,需要加载数据
+			this.state.isLoadData = true;//正在加载数据
 		}
 	}	
 }
