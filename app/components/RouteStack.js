@@ -14,6 +14,7 @@ import WebPage from "../page/WebPage";//阅读文章页
 import MainTabs from "../MainTabs";//测试主页切换
 import Test from "../Test";//测试页
 import {Width,Height,Scale} from "./DeviceInfo";//获取设备信息
+import PostDetail from "../page/PostDetail";//帖子详情页
 // import AnimationInit from "react-native-navigator-animation";
 import AnimationInit from "./Animation";
 
@@ -63,6 +64,9 @@ export const Routes = {
 	},
 	Test:{
 		name:"Test",component:Test,index:8,animationType:FloatFromRight,params:{}
+	},
+	PostDetail:{
+		name:"PostDetail",component:PostDetail,index:8,animationType:FloatFromRight,params:{}
 	}
 }
 
