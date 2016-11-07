@@ -92,9 +92,10 @@ class HomeShow extends Component {
 		const { RootNavigator } = this.props;
 		// 获取文章数据跳过去
 		PromiseGetData(Url).then((data)=>{
-			jumpUseName(RootNavigator,"WebPage",{source:data.content,title:Title,isWeb:false});
+			jumpUseName(RootNavigator,"WebPage",{source:data.Content,title:Title,isWeb:false});
 		}).catch((e)=>{
 			// 记录错误
+			Reactotron.log("HomeShow:"+e)
 		});
 	}
 	componentWillMount(){
