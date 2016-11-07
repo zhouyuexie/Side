@@ -30,15 +30,15 @@ export default class PostFoot extends Component {
 const styles = StyleSheet.create({
 	container:{
 		width:Width,
-		height:60,
+		height:55,
 		flexDirection:'row',
 		justifyContent: "space-between",
 		alignItems:"center",
 		backgroundColor: "#F0F2F6",
 	},
 	left:{
-		width:50,
-		height:50,
+		width:45,
+		height:45,
 		alignItems:"center",
 		justifyContent:"center",
 		backgroundColor: "#fff",
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 	middle:{
 		// width:Width-130,
 		flex:1,
-		height:50,
+		height:45,
 		alignItems:"center",
 		justifyContent:"center",
 		backgroundColor: "#fff", 
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
 		color:"#d5d5d5",
 	},
 	right:{
-		width:50,
-		height:50,
+		width:45,
+		height:45,
 		flexDirection:'row',
 		alignItems:"center",
 		justifyContent:"center",
