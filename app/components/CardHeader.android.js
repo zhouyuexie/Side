@@ -36,12 +36,10 @@ export default class CardHeader extends Component {
 
 const styles = StyleSheet.create({
 	container:{
-		flex:1,
-		marginBottom:10,
+		width:Width,
 		backgroundColor: "#fff",
 	},
 	up:{
-		flex:1,
 		fontSize:14,
 		color:"#666",
 		lineHeight:24,
