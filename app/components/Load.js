@@ -244,6 +244,11 @@ class Load extends Component{
 		if(this.props.isShow){
 			this.OpenLoad();
 		}
+		else{
+			this.setState({
+				zIndex:-10
+			})
+		}
 	}
 }
 
