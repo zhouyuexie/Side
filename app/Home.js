@@ -30,6 +30,7 @@ import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
 import {GetHomeData,PromiseEmptyHomeData} from "./Update";
 import {routesNumber} from "./components/RouteStack";//路由信息
 import Load from "./components/Load";
+import ToastBox from "./components/ToastBox";
 
 class Home extends Component{
 	//定义属性类型
@@ -49,6 +50,7 @@ class Home extends Component{
 		return(
 			<View style={styles.root}>
 				<HomeSearch RootNavigator={RootNavigator} />
+				<ToastBox ref="ToastBox" />
 				<ScrollView style={styles.container} showsVerticalScrollIndicator={false}
 					refreshControl={
 						<RefreshControl 
@@ -60,7 +62,7 @@ class Home extends Component{
 							progressBackgroundColor="#fff"
 						/>
 					}
-					scrollEventThrottle={10}
+					scrollEventThrottle={500}
 					onScroll={(e)=>{this._handleScroll(e)}}>
 					<HomeSlider RootNavigator={RootNavigator} />
 					<HomeBar RootNavigator={RootNavigator} />
@@ -105,7 +107,7 @@ class Home extends Component{
 		}
 	}
 	componentDidMount(){
-		this.refs.Load.setTimeClose();
+		// this.refs.Load.setTimeClose();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
@@ -114,15 +116,15 @@ class Home extends Component{
 		
 	}
 	_onRefresh(){
-		this.refs.Load.OpenLoad();
+		// this.refs.Load.OpenLoad();
 		// PromiseEmptyHomeData(this.props);
 		this.setState({isRefreshing:true});
 		GetHomeData(this.props).then(()=>{
-			this.refs.Load.CloseLoad();
+			// this.refs.Load.CloseLoad();
 			this.setState({
 				isRefreshing:false
 			});
-			// Alert.alert("列表刷新完毕","可以继续刷新");
+			this.refs.ToastBox.SetTime(2000);
 		})
 		// this.setState({isRefreshing:true});
 		// PromiseRefreshing(this.props).then(()=>{
@@ -133,12 +135,12 @@ class Home extends Component{
 		// })
 	}
 	_handleScroll(e){
-		// 改变头部透明度
-		// let alpha = (e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y) / 200;
-
-  //   this.setState({
-  //   	updateAlpha:alpha
-  //   });
+		const contentY = e.nativeEvent.contentSize.height;//整个页面的高度
+		const nowY = e.nativeEvent.contentOffset.y;//现在顶部距离高度
+		if(nowY+Height+100>contentY){
+			// 说明快接近底部了,需要加载数据
+			
+		}
 	}	
 }
 
@@ -148,7 +150,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 	},
 	container:{
-		marginTop:55,
 		backgroundColor: "#d5d5d5",
     marginBottom:50,
 	}
