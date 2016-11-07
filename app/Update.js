@@ -40,7 +40,7 @@ export const PromiseGetData = (Link)=>{
 				'Content-Type': 'application/json',
 			}
 		}).then((response)=>response.json()).then((res)=>{
-			resolve(res.data);
+			resolve(res.Data);
 		}).catch((e)=>{
 			reject(e);
 		});

@@ -60,7 +60,7 @@ class HomeSlider extends Component{
 			else{
 				// 获取文章数据跳过去
 				PromiseGetData(url).then((data)=>{
-					jumpUseName(RootNavigator,"WebPage",{source:data.content,title:title,isWeb:false});
+					jumpUseName(RootNavigator,"WebPage",{source:data.Content,title:title,isWeb:false});
 				}).catch((e)=>{
 					// 记录错误
 				});
