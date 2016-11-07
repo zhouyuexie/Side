@@ -12,8 +12,10 @@ import {
 	Alert
 } from 'react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
+import {PromiseGetData} from "../Update";
 import {jumpUseName} from "../components/RouteStack";//路由栈
 import Reactotron from 'reactotron-react-native';
+import Load from "../components/Load";
 
 const ImageWidthJavaScript = 'window.onload=function(){var jigu_img = document.getElementsByTagName("img");for(var i =0;i<jigu_img.length;i++){jigu_img[i].style.width = "'+Width+'px"}}'
 
@@ -23,7 +25,7 @@ const ReadArticle = React.createClass({
 		url:PropTypes.string,
 		avatar:PropTypes.string,
 		abstract:PropTypes.string,
-		source:PropTypes.string.isRequired,
+		source:PropTypes.string,
 		content:PropTypes.string,
 	},
 	getDefaultProps(){
@@ -34,12 +36,11 @@ const ReadArticle = React.createClass({
 	},
 	getInitialState(){
 		return {
-			isLoad:true
+			isLoad:true,
+			source:""
 		}
 	},
 	render(){
-		const {RootNavigator} = this.props;
-
 		return this._renderWeb(this.props.isWeb)
 	},
 	_renderWeb(isWeb){
@@ -52,22 +53,43 @@ const ReadArticle = React.createClass({
 						source={{uri:this.props.source}}
 						injectedJavaScript={ImageWidthJavaScript}
 						scalesPageToFit={false}
+						automaticallyAdjustContentInsets={true}
 						bounces={true} />
 				</View>
 			)
 		}
 		else{
 			// 传进来的是html字符串
+			// if(this.state.isLoad){
+			// 	return (
+			// 		<Load isShow={true} bgColor="#fff" ref="Load" />
+			// 	)
+			// }
 			return(
 				<View style={styles.root}>
-					<WebView onLoad={()=>{}}
-						source={{html:this.props.source}}
+					<WebView 
+						onLoad={()=>{}}
+						source={{html:this.state.source}}
 						injectedJavaScript={ImageWidthJavaScript}
 						scalesPageToFit={false}
+						automaticallyAdjustContentInsets={true}
 						bounces={true} />
+					<Load isShow={true} bgColor="#fff" ref="Load" />
 				</View>
 			)
 		}
+	},
+	componentWillMount(){
+		PromiseGetData(this.props.url).then((data)=>{
+			this.setState({
+				isLoad:false,
+				source:data.Content
+			});
+			this.refs.Load.CloseLoad();
+		}).catch((e)=>{
+			// 记录错误
+			Reactotron.log("HomeShow:"+e)
+		});
 	}
 })
 

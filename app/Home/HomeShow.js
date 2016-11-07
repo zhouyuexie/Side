@@ -32,7 +32,7 @@ class HomeShow extends Component {
 		}
 	}
 	state={
-		
+		Content:"",
 	}
 	render(){
 		return(
@@ -91,14 +91,19 @@ class HomeShow extends Component {
 	}
 	_onPress(Url,Title){
 		const { RootNavigator } = this.props;
-		// 获取文章数据跳过去
-		PromiseGetData(Url).then((data)=>{
-			jumpUseName(RootNavigator,"PostDetail",{source:data.Content,title:Title,isWeb:false});
-			// jumpUseName(RootNavigator,"WebPage",{source:data.Content,title:Title,isWeb:false});
-		}).catch((e)=>{
-			// 记录错误
-			Reactotron.log("HomeShow:"+e)
-		});
+		// 跳过去
+		jumpUseName(RootNavigator,"WebPage",{url:Url,title:Title,isWeb:false});
+		// 获取文章数据
+		// PromiseGetData(Url).then((data)=>{
+		// 	// jumpUseName(RootNavigator,"PostDetail",{source:data.Content,title:Title,isWeb:false});
+		// 	this.setState({
+		// 		Content:data.Content
+		// 	});
+		// 	Reactotron.log(data.Title)
+		// }).catch((e)=>{
+		// 	// 记录错误
+		// 	Reactotron.log("HomeShow:"+e)
+		// });
 	}
 	componentWillMount(){
 
