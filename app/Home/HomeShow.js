@@ -11,7 +11,8 @@ import {
 	ScrollView,
 	LayoutAnimation,
 	Animated,
-	PanResponder
+	PanResponder,
+	ListView
 } from 'react-native';
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
@@ -35,11 +36,22 @@ class HomeShow extends Component {
 		Content:"",
 	}
 	render(){
+		let ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2});
+		// ds放这里定义,刷新列表才有效,否则看不到效果
 		return(
 			<View style={styles.container}>
-				{this.props.HomeList.map((data)=>{
-					return this._renderPost(data);
-				})}
+				<ListView
+					pageSize={2}
+					onEndReachedThreshold={100}
+					contentContainerStyle={styles.lists}
+					dataSource={ds.cloneWithRows(this.props.HomeList)}
+					renderRow={(rowData)=> this._renderPost(rowData)}
+					/>
+				{
+					// this.props.HomeList.map((data)=>{
+					// 	return this._renderPost(data);
+					// })
+				}
 			</View>
 		)
 	}
@@ -59,7 +71,6 @@ class HomeShow extends Component {
 					return way.two;//全是图片
 			}
 		}
-		
 	}
 	ShowWay(data){
 		return {

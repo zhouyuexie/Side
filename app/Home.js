@@ -67,7 +67,7 @@ class Home extends Component{
 					<HomeSlider RootNavigator={RootNavigator} />
 					<HomeBar RootNavigator={RootNavigator} />
 					<Plate RootNavigator={RootNavigator} />
-					<HomeShow  RootNavigator={RootNavigator} />
+					<HomeShow RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
 				<Load isShow={false} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
@@ -140,6 +140,7 @@ class Home extends Component{
 		if(nowY+Height+100>contentY && !this.state.isLoadData){
 			// 说明快接近底部了,并且没有已经在加载的数据,需要加载数据
 			this.state.isLoadData = true;//正在加载数据
+
 		}
 	}	
 }
