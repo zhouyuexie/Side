@@ -13,6 +13,7 @@ import Articles from "../page/Articles";//文章页
 import WebPage from "../page/WebPage";//阅读文章页
 import MainTabs from "../MainTabs";//测试主页切换
 import Test from "../Test";//测试页
+import {Width,Height,Scale} from "./DeviceInfo";//获取设备信息
 // import AnimationInit from "react-native-navigator-animation";
 import AnimationInit from "./Animation";
 
@@ -20,10 +21,15 @@ let NavigatorSceneConfigs = require('NavigatorSceneConfigs');//转场动画
 let buildStyleInterpolator = require('buildStyleInterpolator');
 let NavAnimate = AnimationInit(buildStyleInterpolator);
 
-const switchMain = {
-	...NavigatorSceneConfigs.FadeAndroid,
-	defaultTransitionVelocity:0,
-	springTension:1000
+// 后退手势可以全屏幕开始
+const FloatFromRight = {
+	...NavigatorSceneConfigs.FloatFromRight,
+	gestures:{
+		pop:{
+			...NavAnimate.BaseLeftToRightGesture,
+			edgeHitWidth:Width
+		}
+	}
 }
 
 // 直接使用
@@ -38,25 +44,25 @@ export const Routes = {
 		name:"Users",component:Users,index:2,animationType:NavAnimate.SwitchMain,params:{}
 	},
 	Log:{
-		name:"Log",component:Log,index:3,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"Log",component:Log,index:3,animationType:FloatFromRight,params:{}
 	},
 	Products:{
-		name:"Products",component:Products,index:4,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"Products",component:Products,index:4,animationType:FloatFromRight,params:{}
 	},
 	TimeKill:{
-		name:"TimeKill",component:TimeKill,index:5,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"TimeKill",component:TimeKill,index:5,animationType:FloatFromRight,params:{}
 	},
 	Articles:{
-		name:"Articles",component:Articles,index:6,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"Articles",component:Articles,index:6,animationType:FloatFromRight,params:{}
 	},
 	WebPage:{
-		name:"WebPage",component:WebPage,index:7,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"WebPage",component:WebPage,index:7,animationType:FloatFromRight,params:{}
 	},
 	MainTabs:{
-		name:"MainTabs",component:MainTabs,index:8,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"MainTabs",component:MainTabs,index:8,animationType:FloatFromRight,params:{}
 	},
 	Test:{
-		name:"Test",component:Test,index:8,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"Test",component:Test,index:8,animationType:FloatFromRight,params:{}
 	}
 }
 

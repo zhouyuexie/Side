@@ -72,7 +72,6 @@ class HomeSlider extends Component{
 		
 	}
 	componentDidMount(){
-		
 	}
 }
 

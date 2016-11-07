@@ -15,6 +15,8 @@ import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";//路由栈
 import Reactotron from 'reactotron-react-native';
 
+const ImageWidthJavaScript = 'window.onload=function(){var jigu_img = document.getElementsByTagName("img");for(var i =0;i<jigu_img.length;i++){jigu_img[i].style.width = "'+Width+'px"}}'
+
 const ReadArticle = React.createClass({
 	propTypes:{
 		title:PropTypes.string.isRequired,
@@ -45,7 +47,12 @@ const ReadArticle = React.createClass({
 		if(isWeb){
 			return(
 				<View style={styles.root}>
-					<WebView onLoad={()=>{}} source={{uri:this.props.source}} />
+					<WebView 
+						onLoad={()=>{}} 
+						source={{uri:this.props.source}}
+						injectedJavaScript={ImageWidthJavaScript}
+						scalesPageToFit={false}
+						bounces={true} />
 				</View>
 			)
 		}
@@ -53,7 +60,11 @@ const ReadArticle = React.createClass({
 			// 传进来的是html字符串
 			return(
 				<View style={styles.root}>
-					<WebView onLoad={()=>{}} source={{html:this.props.source}} />
+					<WebView onLoad={()=>{}}
+						source={{html:this.props.source}}
+						injectedJavaScript={ImageWidthJavaScript}
+						scalesPageToFit={false}
+						bounces={true} />
 				</View>
 			)
 		}
