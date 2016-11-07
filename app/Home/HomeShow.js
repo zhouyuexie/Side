@@ -21,6 +21,7 @@ import {PromiseGetData} from "../Update";
 import Picture from "../components/Picture";//全是图片
 import Post from "../components/Post"//资讯,没有图
 import PictureArticle from "../components/PictureArticle";//图文信息
+import PostDetail from "../page/PostDetail";//帖子详情页
 import {jumpUseName} from "../components/RouteStack";
 
 
@@ -92,7 +93,7 @@ class HomeShow extends Component {
 		const { RootNavigator } = this.props;
 		// 获取文章数据跳过去
 		PromiseGetData(Url).then((data)=>{
-			jumpUseName(RootNavigator,"WebPage",{source:data.Content,title:Title,isWeb:false});
+			jumpUseName(RootNavigator,"PostDetail",{source:data.Content,title:Title,isWeb:false});
 		}).catch((e)=>{
 			// 记录错误
 			Reactotron.log("HomeShow:"+e)
