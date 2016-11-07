@@ -94,6 +94,7 @@ class HomeShow extends Component {
 		// 获取文章数据跳过去
 		PromiseGetData(Url).then((data)=>{
 			jumpUseName(RootNavigator,"PostDetail",{source:data.Content,title:Title,isWeb:false});
+			// jumpUseName(RootNavigator,"WebPage",{source:data.Content,title:Title,isWeb:false});
 		}).catch((e)=>{
 			// 记录错误
 			Reactotron.log("HomeShow:"+e)
