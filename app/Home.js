@@ -27,7 +27,8 @@ import HomeShow from "./Home/HomeShow";//根据数据来判断使用何种方式
 import { connect } from 'react-redux';
 
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
-import {GetHomeData,PromiseEmptyHomeData} from "./Update";
+import {GetHomeData,PromiseEmptyHomeData,PromiseGetListData} from "./Update";
+import {PutHomeListData} from "./action/ActionHome";
 import {routesNumber} from "./components/RouteStack";//路由信息
 import Load from "./components/Load";
 import ToastBox from "./components/ToastBox";
@@ -42,7 +43,8 @@ class Home extends Component{
 		this.state = {
 			exitStartTime:null,
 			isRefreshing : false,
-			updateAlpha:0
+			updateAlpha:0,
+			Index:2,//默认第二页开始
 		}
 	}
 	render(){
@@ -140,7 +142,18 @@ class Home extends Component{
 		if(nowY+Height+100>contentY && !this.state.isLoadData){
 			// 说明快接近底部了,并且没有已经在加载的数据,需要加载数据
 			this.state.isLoadData = true;//正在加载数据
-
+			PromiseGetListData("http://192.168.31.86/api/Home/GetHomeDocList",{Index:this.state.Index,Size:10}).then((res)=>{
+				const {dispatch} = this.props;
+				if(res.Status===1){
+					dispatch(PutHomeListData(res.Data.Content));//未测试
+				}
+				else{
+					this.state.isLoadData = true;
+					return;
+				}
+				this.state.isLoadData = false;
+				this.state.Index++;
+			})
 		}
 	}	
 }
