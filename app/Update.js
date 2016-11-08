@@ -47,6 +47,18 @@ export const PromiseGetData = (Link)=>{
 	})
 }
 
+// 通过发送数据来获取数据
+export const PromiseGetListData = (Link,Data)=>{
+	return fetch(Link,{
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(Data)
+	}).then((response)=>response.json())
+}
+
 // 启动时候检查
 // export default function Update(props,_Ready){
 // 	const {HomeList,dispatch,Link} = props;

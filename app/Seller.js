@@ -64,7 +64,7 @@ class Seller extends Component{
 			},
 			body: JSON.stringify({
 				index: 1,
-				size: 20,
+				size: 10,
 			})
 		}).then((response)=>response.json()).then((res)=>{
 			this.setState({
