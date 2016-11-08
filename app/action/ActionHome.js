@@ -32,7 +32,7 @@ export function EmptyHomeData(){
 
 // 获取首页数据
 export function GetHomeIndexData(){
-	return (dispatch) => {
+	return (dispatch,getState) => {
 		return fetch(Link.HomeIndex)
 				.then((response)=>response.json())
 				.then((res)=>{
@@ -48,5 +48,15 @@ export function GetHomeIndexData(){
 					Promise.reject(error)
 				})
 		// })
+	}
+}
+
+// 增加首页列表数据
+export function PutHomeListData(Content){
+	return (dispatch,getState) => {
+		// 增加首页列表数据
+		const oldData = getState();
+		const ListData = oldData.homeStore.HomeList;
+		dispatch({"type":HOME.GET_LIST,HomeList:Content.concat(ListData)});
 	}
 }
