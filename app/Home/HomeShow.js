@@ -73,29 +73,25 @@ class HomeShow extends Component {
 		}
 	}
 	ShowWay(data){
+		const { RootNavigator } = this.props;
 		return {
 			one:(
 				<TouchableOpacity
-					key={"1"+data.Id}
 					activeOpacity={1}
+					key={"0"+data.Id}
 					onPress={()=>{this._onPress(data.Url,data.Title)}}>
-					<Post key={"11"+data.Id} {...data} />
+					<Post RootNavigator={RootNavigator} key={"11"+data.Id} {...data} />
 				</TouchableOpacity>
 			),
 			two:(
-				<TouchableOpacity
-					activeOpacity={1}
-					key={"2"+data.Id}
-					onPress={()=>{this._onPress(data.Url,data.Title)}}>
-					<Picture key={"22"+data.Id} {...data}/>
-				</TouchableOpacity>
+				<Picture RootNavigator={RootNavigator} key={"22"+data.Id} {...data}/>
 			),
 			three:(
 				<TouchableOpacity
 					activeOpacity={1}
 					key={"3"+data.Id}
 					onPress={()=>{this._onPress(data.Url,data.Title)}}>
-					<PictureArticle key={"33"+data.Id} {...data} />
+					<PictureArticle RootNavigator={RootNavigator} key={"33"+data.Id} {...data} />
 				</TouchableOpacity>
 			)
 		}
@@ -104,17 +100,6 @@ class HomeShow extends Component {
 		const { RootNavigator } = this.props;
 		// 跳过去
 		jumpUseName(RootNavigator,"WebPage",{url:Url,title:Title,isWeb:false});
-		// 获取文章数据
-		// PromiseGetData(Url).then((data)=>{
-		// 	// jumpUseName(RootNavigator,"PostDetail",{source:data.Content,title:Title,isWeb:false});
-		// 	this.setState({
-		// 		Content:data.Content
-		// 	});
-		// 	Reactotron.log(data.Title)
-		// }).catch((e)=>{
-		// 	// 记录错误
-		// 	Reactotron.log("HomeShow:"+e)
-		// });
 	}
 	componentWillMount(){
 

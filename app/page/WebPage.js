@@ -80,16 +80,19 @@ const ReadArticle = React.createClass({
 		}
 	},
 	componentWillMount(){
-		PromiseGetData(this.props.url).then((data)=>{
-			this.setState({
-				isLoad:false,
-				source:data.Content
+		if(!this.props.isWeb){
+			// html格式的
+			PromiseGetData(this.props.url).then((data)=>{
+				this.setState({
+					isLoad:false,
+					source:data.Source
+				});
+				this.refs.Load.CloseLoad();
+			}).catch((e)=>{
+				// 记录错误
+				Reactotron.log("HomeShow:"+e)
 			});
-			this.refs.Load.CloseLoad();
-		}).catch((e)=>{
-			// 记录错误
-			Reactotron.log("HomeShow:"+e)
-		});
+		}
 	}
 })
 

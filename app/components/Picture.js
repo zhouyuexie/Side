@@ -20,23 +20,33 @@ import {jumpUseName} from "../components/RouteStack";
 
 class Picture extends Component {	
 	render(){
-		let Avatar = this.props.Avatar;
+		let {Id,Avatar,Url,Title,ReadCount,Author,CmtCount,MTime} = this.props;
 		let image = Avatar.split(",");//获取图片
 		return(
 			<View style={styles.container}>
-				<Text style={styles.title}>{this.props.Title}</Text>
-        <ScrollView contentContainerStyle={styles.imageItem} horizontal = {true} showsHorizontalScrollIndicator = {false}>
+				<Text onPress={()=>{this._onPress(Url,Title)}} style={styles.title}>{Title}</Text>
+				<ScrollView 
+					style={styles.imageItem} 
+					horizontal={true} 
+					showsHorizontalScrollIndicator={false}>
 					{image.map((data)=>{
 						return this._renderImage(data);
 					})}
 				</ScrollView>
-				<CardFooter name={this.props.Author} readnumber={this.props.ReadCount} isPost={true} time={this.props.MTime} comment={this.props.CmtCount} />
-    	</View>
+				<CardFooter name={Author} readnumber={ReadCount} isPost={true} time={MTime} comment={CmtCount} />
+			</View>
 		)
 	}
 	_renderImage(data){
+		let {Id,Avatar,Url,Title,ReadCount,Author,CmtCount,MTime} = this.props;
 		return (
-			<Image key={data} source={{uri:data.Url}} style={styles.image} />
+			<TouchableOpacity
+				onPress={()=>{this._onPress(Url,Title)}}
+				key={data}
+				activeOpactivy={1}>
+				<Image key={data} source={{uri:data}} style={styles.image} />
+			</TouchableOpacity>
+			
 			/*<TouchableOpacity
 				activeOpactivy={1}
 				key={"Picture"+data.Id}
@@ -45,15 +55,10 @@ class Picture extends Component {
 			</TouchableOpacity>*/
 		)
 	}
-	// _onPress(Url,Title){
-	// 	const { RootNavigator } = this.props;
-	// 	// 获取文章数据跳过去
-	// 	PromiseGetData(Url).then((data)=>{
-	// 		jumpUseName(RootNavigator,"WebPage",{source:data.content,title:Title,isWeb:false});
-	// 	}).catch((e)=>{
-	// 		// 记录错误
-	// 	});
-	// }
+	_onPress(Url,Title){
+		const { RootNavigator } = this.props;
+		jumpUseName(RootNavigator,"WebPage",{url:Url,title:Title,isWeb:false});
+	}
 	componentWillMount(){
 		
 	}
@@ -66,13 +71,13 @@ class Picture extends Component {
 const styles = StyleSheet.create({
 	container:{
 		width:Width,
-    // height:200,
-    justifyContent: "space-around",
-    backgroundColor: "#FFF", 
-    paddingTop:15,
-    paddingBottom:10,
-    paddingLeft:10,
-    marginTop:10,
+		// height:200,
+		justifyContent: "space-around",
+		backgroundColor: "#FFF", 
+		paddingTop:15,
+		paddingBottom:10,
+		paddingLeft:10,
+		marginTop:10,
 	},
 	title:{
 		fontSize:14,
@@ -80,6 +85,7 @@ const styles = StyleSheet.create({
 	},
 	imageItem:{
 		marginBottom:5,
+		flexDirection:"row"
 	},
 	image:{
 		width:Width/3-5,
@@ -88,9 +94,9 @@ const styles = StyleSheet.create({
 		resizeMode:"contain",
 	},
 	bottomText:{
-    flexDirection:'row',
+		flexDirection:'row',
 		justifyContent: "space-between",
-    position:"relative",
+		position:"relative",
 	},
 	left:{
 		fontSize:12,

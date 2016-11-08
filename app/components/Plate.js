@@ -64,7 +64,7 @@ class Plate extends Component {
 				style={styles.body}
 				activeOpacity={1}
 				key={data.Id}
-				onPress={()=>{this._onPress(data.Title,data.Url,data.Author)}}>
+				onPress={()=>{this._onPress(data.Url,data.Title)}}>
 				<Image source={{uri:data.Avatar}} style={styles.image} />
 				<Text numberOfLines={1} style={styles.bodytext}>{data.Title}</Text>
 				<View style={styles.footer}>
@@ -76,8 +76,10 @@ class Plate extends Component {
 			</TouchableOpacity>
 		)
 	}
-	_onPress(Title,Url,Author){
-		
+	_onPress(Url,Title){
+		const { RootNavigator } = this.props;
+		// 跳过去
+		jumpUseName(RootNavigator,"WebPage",{url:Url,title:Title,isWeb:false});
 	}
 	_handleScroll(e){
 		// LayoutAnimation.easeInEaseOut();
