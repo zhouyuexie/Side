@@ -30,7 +30,8 @@ import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
 import {GetHomeData,PromiseEmptyHomeData,PromiseGetListData} from "./Update";
 import {PutHomeListData} from "./action/ActionHome";
 import {routesNumber} from "./components/RouteStack";//路由信息
-import Load from "./components/Load";
+// import Load from "./components/Load";
+import Load from "react-native-loading-gif";
 import ToastBox from "./components/ToastBox";
 
 class Home extends Component{
@@ -72,12 +73,7 @@ class Home extends Component{
 					<HomeShow RootNavigator={RootNavigator} />
 				</ScrollView>
 				<Tabs onselect={0} RootNavigator={RootNavigator} />
-				<Load isShow={false} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
-					<View style={{width:200,height:150,backgroundColor:"#fff"}}>
-						<TouchableOpacity style={{backgroundColor:"#fff"}}>
-							<Text style={{color:"#000"}}>关闭</Text>
-						</TouchableOpacity>
-					</View>
+				<Load isShow={false} bgColor="#000" Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="opacity" ref="Load">
 				</Load>
 				<Tabs RootNavigator={RootNavigator} onselect={0} />
 			</View>
@@ -109,7 +105,7 @@ class Home extends Component{
 		}
 	}
 	componentDidMount(){
-		// this.refs.Load.setTimeClose();
+		this.refs.Load.setTimeClose();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
