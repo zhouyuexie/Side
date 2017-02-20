@@ -83,6 +83,14 @@ const ReadArticle = React.createClass({
 		if(!this.props.isWeb){
 			// html格式的
 			PromiseGetData(this.props.url).then((data)=>{
+				if(!data){
+					// 找不到文章
+					this.refs.Load.CloseLoad();
+					const { RootNavigator } = this.props;
+					Alert.alert("提示","找不到文章!",[
+						{text: '返回', onPress: () => RootNavigator.pop()},
+					]);
+				}
 				this.setState({
 					isLoad:false,
 					source:data.Source
@@ -90,7 +98,7 @@ const ReadArticle = React.createClass({
 				this.refs.Load.CloseLoad();
 			}).catch((e)=>{
 				// 记录错误
-				Reactotron.log("HomeShow:"+e)
+				Reactotron.log("WebPage:"+e)
 			});
 		}
 	}

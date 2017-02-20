@@ -41,7 +41,7 @@ export function GetHomeIndexData(){
 					dispatch({"type":HOME.GET_MENU,HomeMenu:res.Data.Navs});
 					dispatch({"type":HOME.GET_VIDEO,HomeVideo:res.Data.Videos});
 					dispatch({"type":HOME.GET_LIST,HomeList:res.Data.Docs});
-					Promise.resolve("ActionHome.js");
+					// Promise.resolve("ActionHome.js");
 				})
 				.catch((error)=>{
 					// dispatch({"type":HOME.LOG_ERROR,"error":error});

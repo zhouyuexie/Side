@@ -21,7 +21,7 @@ import {jumpUseName} from "../components/RouteStack";
 class Picture extends Component {	
 	render(){
 		let {Id,Avatar,Url,Title,ReadCount,Author,CmtCount,MTime} = this.props;
-		let image = Avatar.split(",");//获取图片
+		let image = Avatar;//获取图片
 		return(
 			<View style={styles.container}>
 				<Text onPress={()=>{this._onPress(Url,Title)}} style={styles.title}>{Title}</Text>

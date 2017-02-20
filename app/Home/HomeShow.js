@@ -59,12 +59,11 @@ class HomeShow extends Component {
 		// const { RootNavigator } = this.props;
 		let Avatar = data.Avatar;
 		let way = this.ShowWay(data);
-		if(Avatar===null){
+		if(Avatar===null||Avatar===""||Avatar.length===0){
 			return way.one;
 		}
 		else{
-			let dataArray = data.Avatar.split(",");
-			switch(dataArray.length){
+			switch(Avatar.length){
 				case 1:
 					return way.three;//只有一个图片,是图文
 				default:

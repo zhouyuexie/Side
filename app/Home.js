@@ -141,7 +141,7 @@ class Home extends Component{
 			PromiseGetListData("http://192.168.31.86/api/Home/GetHomeDocList",{Index:this.state.Index,Size:10}).then((res)=>{
 				const {dispatch} = this.props;
 				if(res.Status===1){
-					dispatch(PutHomeListData(res.Data.Content));//未测试
+					dispatch(PutHomeListData(res.Data));//未测试
 				}
 				else{
 					this.state.isLoadData = true;

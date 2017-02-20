@@ -15,6 +15,7 @@ import Reactotron from 'reactotron-react-native';
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {LogIn} from "../../action/ActionUser";
+// import * as WechatAPI from 'react-native-wx';
 
 let Dimensions = require("Dimensions");
 const Width = Dimensions.get("window").width;//设备的宽度
@@ -70,18 +71,27 @@ class LoginForm extends Component{
 						<View style={styles.line}></View>
 					</View>
 					<View style={styles.loginway}>
-						<View style={styles.way}>
+						<TouchableOpacity 
+							style={styles.way}
+							onPress={()=>{this.otherLogin()}}
+							activeOpacity={0.9}>
 							<Icon style={[styles.icon,styles.qqway]} name="qq" size={40} color="#999" />
 							<Text>QQ</Text>
-						</View>
-						<View style={styles.way}>
+						</TouchableOpacity>
+						<TouchableOpacity 
+							style={styles.way}
+							onPress={()=>{this.otherLogin()}}
+							activeOpacity={0.9}>
 							<Icon style={[styles.icon,styles.wechatway]} name="wechat" size={40} color="#999" />
 							<Text>微信</Text>
-						</View>
-						<View style={styles.way}>
+						</TouchableOpacity>
+						<TouchableOpacity 
+							style={styles.way}
+							onPress={()=>{this.otherLogin()}}
+							activeOpacity={0.9}>
 							<Icon style={[styles.icon,styles.weiboway]} name="weibo" size={40} color="#999" />
 							<Text>微博</Text>
-						</View>
+						</TouchableOpacity>
 					</View>
 				</View>
 			</View>

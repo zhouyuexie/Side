@@ -42,6 +42,12 @@ class Tabs extends Component{
 				case 2:
 					jumpUseName(RootNavigator,"Users");
 					break;
+				case 3:
+					jumpUseName(RootNavigator,"Seller");
+					break;
+				case 4:
+					jumpUseName(RootNavigator,"Users");
+					break;
 			}
 		}
 	}

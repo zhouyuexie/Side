@@ -28,11 +28,12 @@ class PictureArticle extends Component {
 		}
 	}	
 	render(){
+		// Reactotron.log("PictureArticle.js"+this.props.Avatar)
 		return(
 			<View style={styles.container}>
 				<View style={styles.content}>
 					<Text numberOfLines={3} style={styles.title}>{this.props.Title}</Text>
-					<Image style={styles.image} source={{uri:this.props.Avatar}} />
+					<Image style={styles.image} source={{uri:this.props.Avatar[0]}} />
         </View>
 				<CardFooter name={this.props.Author} readnumber={this.props.ReadCount} isPost={true} time={this.props.MTime} comment={this.props.CmtCount} />
     	</View>
